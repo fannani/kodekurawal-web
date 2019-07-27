@@ -165,7 +165,6 @@ WebLanding.propTypes = {
 
 const styledLayout = styled(WebLanding)`
   background-color: white;
-  color: #242223;
   font-family: open sans;
   #features {
     background-image: url(${featuresBackground});

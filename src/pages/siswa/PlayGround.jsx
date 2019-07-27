@@ -1,7 +1,7 @@
-const Draft = require('draft-js');
-const React = require('react');
-const Immutable = require('immutable');
-const PrismDraftDecorator = require('draft-js-prism');
+import Draft from 'draft-js';
+import React from 'react';
+import Immutable from 'immutable';
+import PrismDraftDecorator from 'draft-js-prism';
 import Prism from 'prismjs';
 
 import 'prismjs/themes/prism.css';

@@ -17,7 +17,7 @@ const getUserDetail = async function(user) {
 
 const login = (email, password, role) =>
   axios({
-    url: `${BASE_URL}auth/login`,
+    url: `${SERVER_URL}auth/login`,
     method: 'post',
     data: {
       email,

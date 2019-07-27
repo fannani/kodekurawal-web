@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field } from 'formik';
 
-<div className="form-check">
+/*<div className="form-check">
   <Field
     className="form-check-input"
     type="checkbox"
@@ -11,7 +11,7 @@ import { Field } from 'formik';
   <label className="form-check-label" htmlFor="defaultCheck1">
     Continuous
   </label>
-</div>;
+</div>;*/
 
 const Checkbox = props => (
   <Field name={props.name}>

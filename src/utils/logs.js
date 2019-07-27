@@ -3,7 +3,7 @@ import { BASE_URL } from "../config/config";
 
 export function postLog(category, activity, value) {
   axios
-    .post(`${BASE_URL}api/logs`, {
+    .post(`${SERVER_URL}api/logs`, {
       category,
       activity,
       value,

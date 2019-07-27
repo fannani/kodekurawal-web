@@ -12,7 +12,7 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error });
-    if (process.env.MODE !== 'development') {
+    if (process.env.NODE_ENV !== 'development') {
       Sentry.withScope(scope => {
         scope.setExtras(errorInfo);
         const eventId = Sentry.captureException(error);
@@ -22,7 +22,7 @@ class ErrorBoundary extends Component {
   }
 
   render() {
-    if (this.state.error) {
+    if (this.state.error && process.env.NODE_ENV !== 'development') {
       return (
         <div className={classnames('snap', this.props.className)}>
           <img src={snap} alt="snap" />
