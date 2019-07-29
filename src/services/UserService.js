@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../config/config';
+import {BASE_URL, SERVER_URL} from '../config/config';
 import APIService from './APIService';
 
 const getUserDetail = async function(user) {

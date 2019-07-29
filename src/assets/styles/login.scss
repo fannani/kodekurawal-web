@@ -1,8 +1,11 @@
 :root {
   --input-padding-x: 1.5rem;
   --input-padding-y: .75rem;
-}
 
+}
+#root {
+  height:100%;
+}
 .app-container{
   height:100%;
 }
