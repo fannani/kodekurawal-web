@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t rahadyan/kodekurawal-web-test -f ./Dockerfile.dev --build-arg REACT_APP_BASE_URL=REACT_APP_BASE_URL --build-arg REACT_APP_API_URL=REACT_APP_API_URL --build-arg REACT_APP_BASE_URL=REACT_APP_BASE_URL .
+  - docker build -t rahadyan/kodekurawal-web-test -f ./Dockerfile.dev --build-arg REACT_APP_BASE_URL=REACT_APP_BASE_URL --build-arg REACT_APP_API_URL=REACT_APP_API_URL --build-arg REACT_APP_BASE_URL=REACT_APP_BASE_URL --build-arg CI=true .
 
 script:
   - docker run rahadyan/kodekurawal-web-test npm test
