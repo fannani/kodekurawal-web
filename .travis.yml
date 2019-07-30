@@ -13,6 +13,3 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push rahadyan/kodekurawal-web
 
-branches:
-  only:
-    - master
