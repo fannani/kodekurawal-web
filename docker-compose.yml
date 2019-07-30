@@ -1,0 +1,15 @@
+version: "3"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./usr/src/app/node_modules
+      - ./src:/usr/src/app/src
+    env_file:
+      - .env
+
