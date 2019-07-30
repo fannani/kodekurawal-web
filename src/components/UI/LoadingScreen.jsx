@@ -1,5 +1,5 @@
 import React from 'react';
-import { BeatLoader } from 'react-spinners';
+import BeatLoader from 'react-spinners/BeatLoader';
 import styled from 'styled-components';
 
 const LoadingScreen = ({ className }) => (
