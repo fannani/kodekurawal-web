@@ -22,6 +22,7 @@ const Layout = () => {
   };
 
   const onClickVideo = () => {
+    player.addEnergy(300); //for test
     setShowModal(false);
     setShowVideo(true);
   };

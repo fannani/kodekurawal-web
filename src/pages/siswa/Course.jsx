@@ -5,18 +5,15 @@ import Tour from 'reactour';
 import Sidebar from 'react-sidebar';
 import shortid from 'shortid';
 import OutOfEnergyModal from '../../components/siswa/Course/OutOfEnergyModal';
-import SiswaCourseGuide from '../../components/siswa/Course/Guide';
 import SiswaCourseValidator from '../../components/siswa/Course/Validator';
 import SiswaCourseFooter from '../../components/siswa/Course/Footer';
-import SiswaCourseEditor from '../../components/siswa/Course/Editor';
-import SiswaCourseOutput from '../../components/siswa/Course/Output';
 import SiswaCourseScoreBoard from '../../components/siswa/Course/ScoreBoard/ScoreBoard';
 import SiswaCourseSidebar from '../../components/siswa/Course/Sidebar';
 import {
   GET_STAGE_BY_COURSE_PLAYER,
   GET_STAGE_BY_PLAYER,
 } from '../../queries/stages';
-import { calculateStars, checkResult } from '../../utils/course';
+import { calculateStars } from '../../utils/course';
 import PreventNavigationDialog from '../../components/PreventNavigationDialog';
 import usePlayer from '../../hooks/player';
 import useInteractiveCoding from '../../hooks/interactiveCoding';
@@ -26,6 +23,8 @@ import {
   GET_PLAYER_ACHIEVEMENTS,
 } from '../../queries/player';
 import Loader from '../../components/siswa/Course/Loader';
+import Coding from "./Coding";
+import Quiz from "./Quiz";
 //TODO: Output default mode
 //TODO: useRef in interval (Riset)
 //TODO: useRef in script
@@ -226,40 +225,10 @@ const Course = ({
                       {({ result }) => (
                         <>
                           <div className="row flex-xl-nowrap">
-                            <SiswaCourseGuide
-                              visible={false}
-                              result={result}
-                              stage={stages[0]}
-                              show={interactive.guideShow}
-                              onClick={interactive.onGuideClick}
-                            />
-                            <SiswaCourseEditor
-                              checkResult={data =>
-                                checkResult(data, stages[0].missions)
-                              }
-                              onClick={interactive.onEditorClick}
-                              show={interactive.editorShow}
-                              editorId={editorId}
-                              initialScript={stages[0].script}
-                              onExpandClick={interactive.onEditorExpandClick}
-                              size={interactive.editorSize}
-                              onReset={reset}
-                              onChange={data => {
-                                script = data;
-                              }}
-                            />
-                            <SiswaCourseOutput
-                              activeMode={
-                                stages[0].course._id ===
-                                '5cbee57ee721c733c0a428a7'
-                                  ? 'console'
-                                  : 'output'
-                              }
-                              show={interactive.outputShow}
-                              onExpandClick={interactive.onOutputExpandClick}
-                              onClick={interactive.onOutputClick}
-                              size={interactive.outputSize}
-                            />
+                            <Coding interactive={interactive} reset={reset} result={result} editorId={editorId} stage={stages[0]} onScriptChange={(val) => {
+                              script = val;
+                            }} />
+                            {/*<Quiz />*/}
                           </div>
                           <SiswaCourseFooter
                             course={stages[0].course}

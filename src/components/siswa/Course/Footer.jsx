@@ -40,7 +40,7 @@ const SiswaCourseFooter = ({ className, course, stage, history,onMenuClick }) =>
       </div>
       <div className="col-4 level-nav">
         <button
-          className="btn float-left "
+          className="btn btn-light  float-left "
           disabled={leftDisable}
           onClick={() => {
             history.push(`/play/${prev}`);
@@ -52,7 +52,7 @@ const SiswaCourseFooter = ({ className, course, stage, history,onMenuClick }) =>
           {stage.index}/{course.stages.length}
         </span>
         <button
-          className="btn float-right "
+          className="btn  btn-light float-right "
           disabled={rightDisable}
           onClick={() => {
             history.push(`/play/${next}`);
