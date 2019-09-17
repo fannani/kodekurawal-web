@@ -6,8 +6,7 @@ import PropTypes from 'prop-types';
 const Logo = ({ className, mode }) => (
   <h1 className={classnames(className)}>
     <span className={mode === 'dark' ? 'dark' : 'light'}>
-      {'{'}Kode<span className="kurawal">Kurawal</span>
-      {'}'}
+      Sainfikasi
     </span>
   </h1>
 );

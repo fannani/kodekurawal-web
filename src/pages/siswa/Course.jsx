@@ -225,10 +225,10 @@ const Course = ({
                       {({ result }) => (
                         <>
                           <div className="row flex-xl-nowrap">
-                            <Coding interactive={interactive} reset={reset} result={result} editorId={editorId} stage={stages[0]} onScriptChange={(val) => {
-                              script = val;
-                            }} />
-                            {/*<Quiz />*/}
+                            {/*<Coding interactive={interactive} reset={reset} result={result} editorId={editorId} stage={stages[0]} onScriptChange={(val) => {*/}
+                            {/*  script = val;*/}
+                            {/*}} />*/}
+                            <Quiz />
                           </div>
                           <SiswaCourseFooter
                             course={stages[0].course}
