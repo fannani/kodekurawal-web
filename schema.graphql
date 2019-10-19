@@ -19,19 +19,6 @@ type Achievement {
 scalar Upload
 
 
-type User {
-  _id: ID!
-  email: String!
-  name: String!
-  role: String!
-  city: String
-  province: String
-  last_login: String
-  userdetailid: String!
-  password: String!
-  updated_at: String!
-}
-
 type AchievementDetail {
   _id: ID!
   achievement: ID!
@@ -78,6 +65,17 @@ type Course {
   badge: Badge
   stages: [Stage]
   leaderboard: [Leaderboard]
+}
+
+type File {
+  id: ID!
+  title: String!
+  path: String!
+}
+
+input FileInput {
+  title: String!
+  file: Upload!
 }
 
 type Leaderboard {
@@ -205,6 +203,7 @@ type Mutation {
   updateCourse(id: ID!, name: String, desc: String, script: String): Course
   deleteCourse(id: ID!): Course
   uploadImage(courseid: ID, file: Upload): String
+  uploadFile(input: FileInput!): File
 }
 
 type Player {
@@ -264,6 +263,8 @@ type Query {
   allQuiz: [Quiz]
   stages(_id: ID, course: ID, player: ID): [Stage]
   courses(_id: ID): [Course]
+  files: [File]
+  File(id: ID!): Course
 }
 
 type Question {
@@ -366,6 +367,20 @@ type TestCaseMission {
   mission: ID!
   testcase: TestCase
   params: [String]
+  updated_at: String!
+}
+
+
+type User {
+  _id: ID!
+  email: String!
+  name: String!
+  role: String!
+  city: String
+  province: String
+  last_login: String
+  userdetailid: String!
+  password: String!
   updated_at: String!
 }
 

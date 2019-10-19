@@ -98,7 +98,7 @@ const MaterialType = ({stage}) => {
         // updateContent({ variables: { title, id: stage._id } });
         updateMaterial({
           variables: {
-            id:  data.material.id,
+            id:  data.material._id,
             data: {
               materialType,
               body,
