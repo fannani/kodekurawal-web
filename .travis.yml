@@ -1,0 +1,18 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t rahadyan/kodekurawal-web-test -f ./Dockerfile.dev .
+
+script:
+  - docker run -e REACT_APP_BASE_URL=$REACT_APP_BASE_URL -e REACT_APP_API_URL=$REACT_APP_API_URL -e REACT_APP_SERVER_URL=$REACT_APP_SERVER_URL rahadyan/kodekurawal-web-test npm test
+
+after_success:
+  - docker build -t rahadyan/kodekurawal-web .
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push rahadyan/kodekurawal-web
+
+branches:
+  only:
+    - master

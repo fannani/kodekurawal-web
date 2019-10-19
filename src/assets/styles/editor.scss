@@ -1,0 +1,31 @@
+.editorContainer div.DraftEditor-root {
+  background-color: #ffffff;
+  width: 100%;
+  margin: auto;
+  height: 300px;
+  border: 1px solid #d9d9d9;
+  border-radius: 3px;
+  overflow-y: scroll;
+  padding: 20px;
+  font-size: 18px;
+  font-family: 'calibri', sans-serif;
+}
+
+.public-DraftStyleDefault-pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
+  font-size: 15px;
+  padding: 20px;
+}
+.public-DraftStyleDefault-pre pre {
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.editorContainer .btn-toolbar {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
