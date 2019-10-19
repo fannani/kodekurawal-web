@@ -15,14 +15,14 @@ import {UPDATE_STAGE} from "../../../../../queries/stages";
 
 const initialQuestion = {
   stage: '',
-  type: questionType.MULTIPLE_CHOICE,
+  questionType: questionType.MULTIPLE_CHOICE,
   choice: ['', '', '', '', ''],
   answer: '',
   score: 30,
 };
 
 const QuestionField = ({ question, index, setFieldValue }) => {
-  if (question.type === 'MULTIPLE_CHOICE') { return <MultipleChoice question={question} index={index} answer={question.answer} setFieldValue={setFieldValue} />; }
+  if (question.questionType === 'MULTIPLE_CHOICE') { return <MultipleChoice question={question} index={index} answer={question.answer} setFieldValue={setFieldValue} />; }
   return <Essay question={question} index={index} setFieldValue={setFieldValue} />;
 };
 export default ({ stage, history }) => {
@@ -39,7 +39,7 @@ export default ({ stage, history }) => {
       cache.writeQuery({
         query: GET_QUIZ,
         variables: {
-          stageid: stage.id,
+          stageid: stage._id,
         },
         data: { quiz: result },
       });
@@ -66,13 +66,13 @@ export default ({ stage, history }) => {
       }}
 
       onSubmit={({ title, time, questions }, { setSubmitting }) => {
-        updateStage({ variables: { title, id: stage.id } });
+        updateStage({ variables: { title, id: stage._id } });
         const questionsData = questions.map((q) => ({
-          answer: q.answer, choice: q.choice, content: q.content, score: q.score, type: q.type,
+          answer: q.answer, choice: q.choice, content: q.content, score: q.score, questionType: q.questionType,
         }));
         updateQuiz({
           variables: {
-            id: data.evaluation.id,
+            id: data.quiz._id,
             data: {
               time,
               questions: questionsData,
@@ -147,7 +147,7 @@ export default ({ stage, history }) => {
                         <div className="form-group">
                           <label htmlFor="content">Type</label>
                           <Field
-                            name={`questions.${index}.type`}
+                            name={`questions.${index}.questionType`}
                             component="select"
                             placeholder="Type"
                             className="form-control"

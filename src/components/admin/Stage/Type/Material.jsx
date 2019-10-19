@@ -7,6 +7,7 @@ import {Field, Form, Formik} from "formik";
 import UploadAdapter from "../../../../utils/UploadAdapter";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import {GET_STAGE_BY_ID, UPDATE_STAGE} from "../../../../queries/stages";
 
 const materialType = {
   PDF: 'PDF',
@@ -61,6 +62,13 @@ const MaterialType = ({stage}) => {
     },
   });
 
+  const [updateStage] = useMutation(UPDATE_STAGE, {
+    onCompleted() {
+      toast.success("Updated successfully");
+      formMaterial.current.setSubmitting(false);
+    }
+  })
+
   const [updateMaterial] = useMutation(UPDATE_MATERIAL, {
     update(cache, { data: { updateMaterial: result } }) {
       cache.writeQuery({
@@ -95,7 +103,7 @@ const MaterialType = ({stage}) => {
       onSubmit={({ title, body, materialType }, { setSubmitting }) => {
         setSubmitting(true);
         // TODO: update after insert
-        // updateContent({ variables: { title, id: stage._id } });
+        updateStage({ variables: { title, id: stage._id } });
         updateMaterial({
           variables: {
             id:  data.material._id,
