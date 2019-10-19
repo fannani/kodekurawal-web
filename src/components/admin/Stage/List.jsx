@@ -69,7 +69,8 @@ const AdminStageList = ({ client, onDelete, courseid, stages, onCreate }) => {
                 <table className="table">
                   <thead>
                     <tr>
-                      <th width="80%">TITLE</th>
+                      <th width="70%">TITLE</th>
+                      <th width="10%">TYPE</th>
                       <th width="20%"> ACTION</th>
                     </tr>
                   </thead>
@@ -93,6 +94,7 @@ const AdminStageList = ({ client, onDelete, courseid, stages, onCreate }) => {
                                 ref={provided.innerRef}
                               >
                                 <td width="80%">{stage.title}</td>
+                                <td width="80%">{stage.type}</td>
                                 <td width="20%">
                                   <Link
                                     to={`/admin/stage/${stage._id}`}

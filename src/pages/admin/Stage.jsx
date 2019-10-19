@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Modal from 'react-bootstrap4-modal';
 import { Formik, Form, Field } from 'formik';
 import { Mutation, Query } from 'react-apollo';
@@ -7,6 +7,38 @@ import { ADD_MISSION } from '../../queries/missions';
 
 import UpdateForm from '../../components/admin/Stage/UpdateForm';
 import MissionList from '../../components/admin/Stage/MissionList';
+import MaterialType from "../../components/admin/Stage/Type/Material";
+import QuizType from "../../components/admin/Stage/Type/Quiz";
+
+
+const ProgrammingType = ({stage, addMission, missions, language}) => {
+  return (<>
+    <UpdateForm stage={stage} />
+    <MissionList
+      onAddMission={addMission}
+      missions={missions}
+      language={language}
+      />
+  </>)
+}
+
+
+
+
+
+const Type = ({material, quiz, programming, type}) => {
+  if(type === "PROGRAMMING"){
+    return programming;
+  }
+  if(type === "QUIZ") {
+    return quiz;
+  }
+  if(type === "MATERIAL"){
+    return material;
+  }
+}
+
+
 
 const Stage = ({ match, history }) => {
   const [showModal, setShowModal] = useState(false);
@@ -20,6 +52,7 @@ const Stage = ({ match, history }) => {
     setShowModal(true);
   };
 
+
   return (
     <div className="container-fluid">
       <div className="row justify-content-center">
@@ -28,14 +61,13 @@ const Stage = ({ match, history }) => {
             if (loading) return <p>Loading…</p>;
             if (error)
               return <p>Sorry! There was an error loading the items</p>;
-
             return (
               <main className="col-12 main-container">
-                <UpdateForm stage={stages[0]} />
-                <MissionList
-                  onAddMission={addMission}
-                  missions={stages[0].missions}
-                  language={stages[0].language}
+                <Type
+                  type={stages[0].type}
+                  programming={<ProgrammingType stage={stages[0]} addMission={addMission} missions={stages[0].missions} language={stages[0].language} />}
+                  quiz={<QuizType stage={stages[0]}/>}
+                  material={<MaterialType stage={stages[0]} />}
                 />
               </main>
             );

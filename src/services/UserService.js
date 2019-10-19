@@ -15,27 +15,30 @@ const getUserDetail = async function(user) {
   });
 };
 
-const login = (email, password, role) =>
-  axios({
-    url: `${SERVER_URL}auth/login`,
-    method: 'post',
-    data: {
-      email,
-      password,
-    },
-  })
-    .then(async response => {
-      if (response.data.user && response.data.user.role === role) {
-        if (response.data.user.role === 'siswa') {
-          const { user } = response.data;
-          const detail = await getUserDetail(user);
-          return detail;
-        }
-        return response.data.user;
-      }
-      throw Error('Email atau Password salah');
+const login = (email, password, role) => {
+    console.log(`${SERVER_URL}auth/login`);
+    return  axios({
+        url: `${SERVER_URL}auth/login`,
+        method: 'post',
+        data: {
+            email,
+            password,
+        },
     })
-    .then(userdetail => userdetail);
+        .then(async response => {
+            if (response.data.user && response.data.user.role === role) {
+                if (response.data.user.role === 'siswa') {
+                    const { user } = response.data;
+                    const detail = await getUserDetail(user);
+                    return detail;
+                }
+                return response.data.user;
+            }
+            throw Error('Email atau Password salah');
+        })
+        .then(userdetail => userdetail);
+}
+
 
 const logout = () => {
   localStorage.removeItem('user');

@@ -70,7 +70,7 @@ export const GET_STAGE_BY_ID = gql`
       teory
       script
       language
-
+      type
       course {
         _id
         stages {
@@ -131,22 +131,23 @@ export const ADD_STAGE = gql`
   mutation addStage(
     $title: String!
     $teory: String
-    $time: String
+    $time: Int
     $course: ID!
-    $script: String
+    $type: StageType!
   ) {
     addStage(
       title: $title
       teory: $teory
       time: $time
       course: $course
-      script: $script
+      type: $type
     ) {
       _id
       title
       time
       teory
       script
+        type
       course {
         _id
       }

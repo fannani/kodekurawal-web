@@ -1,0 +1,371 @@
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+) on FIELD_DEFINITION | OBJECT | INTERFACE
+type Achievement {
+  id: ID!
+  text: String!
+  _id: ID!
+  title: String!
+  continuous: Boolean!
+  caption: String
+  star: Int
+  target_point: Int
+  point: Int
+  updated_at: String!
+}
+
+# The `Upload` scalar type represents a file upload.
+scalar Upload
+
+
+type User {
+  _id: ID!
+  email: String!
+  name: String!
+  role: String!
+  city: String
+  province: String
+  last_login: String
+  userdetailid: String!
+  password: String!
+  updated_at: String!
+}
+
+type AchievementDetail {
+  _id: ID!
+  achievement: ID!
+  star: Int!
+  caption: String!
+  target_point: Int!
+  updated_at: String!
+}
+
+input AnswerInput {
+  index: Int!
+  answer: String
+}
+
+type Avatar {
+  _id: ID!
+  title: String
+  min_exp: Int
+  imageid: String
+  unlock: Boolean
+  updated_at: String!
+}
+
+type Badge {
+  _id: ID!
+  title: String
+  imageid: String
+  updated_at: String!
+}
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+type Course {
+  _id: ID!
+  name: String!
+  index: Int
+  script: String
+  desc: String!
+  imageid: String
+  updated_at: String!
+  badge: Badge
+  stages: [Stage]
+  leaderboard: [Leaderboard]
+}
+
+type Leaderboard {
+  _id: ID!
+  score: Int!
+  player: Player
+}
+
+type Material {
+  _id: ID!
+  stage: Stage
+  body: String
+  materialType: MaterialType
+  url: String
+}
+
+input MaterialInput {
+  body: String
+  stage: ID
+  materialType: MaterialType
+  url: String
+}
+
+enum MaterialType {
+  PDF
+  WEB
+}
+
+input MaterialWhere {
+  _id: ID
+  stage: ID
+}
+
+type Mission {
+  _id: ID!
+  quest: String!
+  score: Int!
+  testcase: [TestCaseMission]
+  updated_at: String!
+}
+
+type Mutation {
+  addTestCase(caption: String!, script: String!): TestCase
+  deleteTestcase(id: ID!): TestCase
+  addPlayerAchievement(
+    player: ID!
+    achievement: ID!
+    star: Int!
+    point: Int!
+  ): Achievement
+  giveAchievement(player: ID!, achievement: ID!): Achievement
+  addPlayerLevel(level: Int!, exp_req: Int!): PlayerLevel
+  addEnergy(energy: Int!, userid: ID!): Player
+  changeAvatar(player: ID!, avatar: ID!): Player
+  addBadgePlayer(id: ID!, badge: ID!): Player
+  setTutorial(userid: ID!, tutorial: Boolean, index: Int): Player
+  addExp(exp: Int!, userid: ID!): Player
+  addFriend(playerid: ID!, friendid: ID!): Player
+  register(name: String!, email: String!, password: String!): User
+  addAvatar(title: String!, min_exp: Int!, image: Upload): Avatar
+  addBadge(title: String!, imageid: String): Badge
+  updateBadge(id: ID, title: String, image: Upload, course: ID): Badge
+  addDetailAchievement(
+    achievement: ID!
+    star: Int!
+    caption: String!
+    target_point: Int!
+  ): AchievementDetail
+  addAchievement(
+    title: String!
+    continuous: Boolean!
+    file: Upload
+  ): Achievement
+  deleteTestCaseMission(id: ID!): TestCaseMission
+  addTestCaseMission(
+    mission: ID!
+    testcase: ID!
+    params: [String]
+  ): TestCaseMission
+  addMission(quest: String!, score: Int!, stage: ID!): Mission
+  updateMission(id: ID!, quest: String, score: Int): Mission
+  addScore(
+    player: ID!
+    stage: ID!
+    course: ID!
+    score: Int!
+    time: Int!
+    stars: [Boolean]!
+    script: String!
+  ): Score
+  createMaterial(input: MaterialInput!): Material
+  updateMaterial(where: MaterialWhere!, input: MaterialInput!): Material
+  upsertMaterial(id: ID!, data: MaterialInput!): Material
+  deleteMaterial(id: ID!): Material
+  createQuiz(input: QuizInput!): Quiz
+  upsertQuiz(id: ID!, data: QuizInput!): Quiz
+  updateQuiz(id: ID!, input: QuizInput!): Quiz
+  deleteQuiz(id: ID!): Quiz
+  submitQuiz(input: QuizSubmitInput!): Score
+  addStage(
+    title: String!
+    teory: String
+    time: Int
+    index: Int
+    exp_reward: Int
+    course: ID!
+    language: String
+    type: StageType
+  ): Stage
+  updateStage(
+    id: ID!
+    title: String
+    teory: String
+    index: Int
+    time: Int
+    exp_reward: Int
+    course: ID!
+    file: Upload
+    script: String
+    language: String
+  ): Stage
+  deleteStage(id: ID!): Stage
+  reorderStage(courseid: ID, source: ID, destination: Int): Course
+  addCourse(name: String!, desc: String!, script: String, file: Upload): Course
+  updateCourse(id: ID!, name: String, desc: String, script: String): Course
+  deleteCourse(id: ID!): Course
+  uploadImage(courseid: ID, file: Upload): String
+}
+
+type Player {
+  _id: ID!
+  user: User!
+  energy: Int!
+  friends: [ID]
+  daily_exp: Int
+  avatar: Avatar
+  avatars: [Avatar]
+  daily_login: Boolean
+  energy_time: String
+  tutorial: [Boolean]
+  badges: [Badge]
+  achievements: [Achievement]
+  achievement_total: Int
+  stars: Int
+  course: [Course]
+  level: Int
+  birthday: String
+  exp: Int
+  target_exp: Int
+  updated_at: String
+}
+
+type PlayerAchievement {
+  _id: ID!
+  player: ID!
+  achievement: ID!
+  star: Int!
+  point: Int!
+  updated_at: String!
+}
+
+type PlayerLevel {
+  _id: ID!
+  level: Int!
+  exp_req: Int!
+  updated_at: String!
+}
+
+type Query {
+  users(_id: ID): [User]
+  testcases: [TestCase]
+  playerAchievements: [PlayerAchievement]
+  playerLevel: [PlayerLevel]
+  players(_id: ID, energy: Int): [Player]
+  avatars: [Avatar]
+  badges: [Badge]
+  achievements: [Achievement]
+  testCaseMissions(_id: ID, mission: ID): [TestCaseMission]
+  missions: [Mission]
+  scores: [Score]
+  material(where: MaterialWhere!, css: Boolean = true): Material
+  materials: [Material]
+  quiz(where: QuizWhere!, random: Boolean = false): Quiz
+  allQuiz: [Quiz]
+  stages(_id: ID, course: ID, player: ID): [Stage]
+  courses(_id: ID): [Course]
+}
+
+type Question {
+  content: String!
+  questionType: QuestionType!
+  choice: [String]
+  answer: String
+  score: Int!
+}
+
+input QuestionInput {
+  content: String
+  questionType: QuestionType
+  choice: [String]
+  answer: String
+  score: Int!
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  ESSAY
+}
+
+type Quiz {
+  _id: ID!
+  title: String
+  questions: [Question]
+  time: Int
+  stage: Stage
+}
+
+input QuizInput {
+  time: Int
+  title: String
+  questions: [QuestionInput]
+  stage: ID
+}
+
+input QuizSubmitInput {
+  time: Int
+  quiz: ID
+  player: ID
+  answer: [AnswerInput]
+}
+
+input QuizWhere {
+  id: ID
+  stage: ID
+}
+
+type Score {
+  _id: ID!
+  score: Int!
+  time: Int!
+  stars: [Boolean]!
+  updated_at: String!
+  script: String!
+  player: Player
+  course: Course
+  stage: Stage
+  stages: [Stage]
+}
+
+type Stage {
+  _id: ID!
+  title: String!
+  teory: String
+  exp_reward: Int
+  index: Int
+  time: Int
+  win: Boolean
+  score: Int
+  type: StageType
+  badge_name: String
+  badge_image: String
+  language: String
+  stars: [Boolean]
+  imageid: String
+  script: String
+  missions: [Mission]
+  course: Course
+  updated_at: String!
+}
+
+enum StageType {
+  PROGRAMMING
+  MATERIAL
+  QUIZ
+}
+
+type TestCase {
+  _id: ID
+  caption: String
+  script: String
+  updated_at: String
+}
+
+type TestCaseMission {
+  _id: ID!
+  mission: ID!
+  testcase: TestCase
+  params: [String]
+  updated_at: String!
+}
+
