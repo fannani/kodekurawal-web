@@ -6,7 +6,7 @@ before_install:
   - docker build -t rahadyan/kodekurawal-web-test -f ./Dockerfile.dev .
 
 script:
-  - docker run rahadyan/kodekurawal-web-test npm test -e REACT_APP_BASE_URL=$REACT_APP_BASE_URL -e REACT_APP_API_URL=$REACT_APP_API_URL -e REACT_APP_SERVER_URL=$REACT_APP_SERVER_URL
+  - docker run -e REACT_APP_BASE_URL=$REACT_APP_BASE_URL -e REACT_APP_API_URL=$REACT_APP_API_URL -e REACT_APP_SERVER_URL=$REACT_APP_SERVER_URL rahadyan/kodekurawal-web-test npm test
 
 after_success:
   - docker build -t rahadyan/kodekurawal-web .
