@@ -11,6 +11,7 @@ COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 # Copy .env file and shell script to container
 WORKDIR /usr/share/nginx/html
 COPY ./env.sh .
+COPY .env.example .
 # Add bash
 # Make our shell script executable
 RUN chmod +x env.sh
