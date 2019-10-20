@@ -24,3 +24,7 @@ yarn-error.log*
 
 .env
 /.idea
+
+# Temporary env files
+/public/env-config.js
+env-config.js
