@@ -16,8 +16,6 @@ COPY ./env.sh .
 COPY .env .
 
 # Add bash
-RUN apk add --no-cache bash
-
 # Make our shell script executable
 RUN chmod +x env.sh
 
