@@ -13,6 +13,7 @@ import instagram from '../../assets/images/instagram.png';
 import twitter from '../../assets/images/twitter.png';
 import facebook from '../../assets/images/facebook.png';
 import Logo from '../../components/UI/Logo';
+import {TITLE} from "../../config/config";
 
 const WebLanding = ({ className }) => (
   <div className={classnames('container-fluid', className)}>
@@ -50,7 +51,7 @@ const WebLanding = ({ className }) => (
     <div id="features" className="row">
       <div className="col-12">
         <div className="row justify-content-md-center">
-          <h2>Kenapa KodeKurawal</h2>
+          <h2>Kenapa {TITLE}</h2>
         </div>
         <div className="row justify-content-md-center">
           <div className="feature col-3">
@@ -84,8 +85,8 @@ const WebLanding = ({ className }) => (
       <div className="col-4 offset-1">
         <h3>Berlangganan Informasi KodeMaster Melalui Email</h3>
         <p>
-          Jangan sampai kamu melewatkan informasi penting tentang KodeKurawal.
-          Kamu bisa berlangganan Newsletter KodeKurawal dengan cara mengisi
+          Jangan sampai kamu melewatkan informasi penting tentang {TITLE}.
+          Kamu bisa berlangganan Newsletter {TITLE} dengan cara mengisi
           formulir di samping.
         </p>
       </div>
@@ -151,9 +152,9 @@ const WebLanding = ({ className }) => (
       <div className="row">
         <div className="d-flex" />
         <p className="mr-auto copyright">
-          © 2019 kodekurawal. All rights reserved
+          © 2019 {TITLE}. All rights reserved
         </p>
-        <p className="ml-auto email">admin@kodekurawal.com</p>
+        <p className="ml-auto email">admin@{TITLE}.com</p>
       </div>
     </div>
   </div>

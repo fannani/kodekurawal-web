@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import {TITLE} from "../../config/config";
 
 const Logo = ({ className, mode }) => (
   <h1 className={classnames(className)}>
     <span className={mode === 'dark' ? 'dark' : 'light'}>
-      Sainfikasi
+      {TITLE}
     </span>
   </h1>
 );

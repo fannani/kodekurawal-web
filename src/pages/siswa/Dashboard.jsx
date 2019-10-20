@@ -10,6 +10,7 @@ import DailyTarget from '../../components/siswa/Dashboard/DailyTarget';
 import Status from '../../components/siswa/Dashboard/Status';
 import lock from '../../assets/images/lock.png';
 import ModalAva from '../../components/siswa/Dashboard/ModalAva';
+import {TITLE} from "../../config/config";
 
 const AvaItem = styled.div`
   background-color: white;
@@ -24,7 +25,7 @@ const AvaItem = styled.div`
 const tour = [
   {
     selector: '#status-bar',
-    content: 'Selamat datang di halaman Dashboard KodeKurawal',
+    content: 'Selamat datang di halaman Dashboard '+TITLE,
   },
   {
     selector: '#ava-pict',
