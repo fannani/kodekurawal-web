@@ -11,15 +11,15 @@ const Tracker = styled.div`
   
 `
 
-const ProgressInTracker = () => (
-  <div style={{width: '80%', backgroundColor: "#93D333",height:'100%', borderRadius: "10px"}}>
+const ProgressInTracker = ({percentage}) => (
+  <div style={{width: `${percentage}%`, backgroundColor: "#93D333",height:'100%', borderRadius: "10px", transition: "width 1s"}}>
   </div>
 )
 
-const ProgressBar = () => {
+const ProgressBar = ({progress}) => {
     return (
       <Tracker>
-        <ProgressInTracker percentage={25} />
+        <ProgressInTracker percentage={progress} />
       </Tracker>
     )
 }
