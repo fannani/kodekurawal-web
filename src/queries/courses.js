@@ -30,6 +30,7 @@ export const GET_COURSE_BYID = gql`
         teory
         imageid
         index
+        type
       }
       leaderboard {
         _id

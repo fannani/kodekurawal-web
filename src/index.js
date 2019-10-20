@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import firebase from 'firebase/app';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBars, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import './assets/styles/app.scss';
 import 'bootstrap';
 import './index.css';
@@ -26,7 +26,7 @@ window.axios = require('axios');
 window.jQuery = window.$;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-library.add(faBars, faPlusCircle);
+library.add(faBars, faPlusCircle, faTrash);
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

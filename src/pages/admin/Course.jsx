@@ -42,7 +42,7 @@ const Course = ({ history }) => {
               <div className="row" style={{ marginTop: '20px' }}>
                 <div className="col-12">
                   <div>
-                    <Query query={GET_COURSES}>
+                    <Query query={GET_COURSES} fetchPolicy='network-only'>
                       {({ loading, error, data }) => {
                         if (loading) return <p>Loading…</p>;
                         if (error)

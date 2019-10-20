@@ -69,7 +69,8 @@ const AdminStageList = ({ client, onDelete, courseid, stages, onCreate }) => {
                 <table className="table">
                   <thead>
                     <tr>
-                      <th width="80%">TITLE</th>
+                      <th width="60%">TITLE</th>
+                      <th width="20%">TYPE</th>
                       <th width="20%"> ACTION</th>
                     </tr>
                   </thead>
@@ -92,7 +93,8 @@ const AdminStageList = ({ client, onDelete, courseid, stages, onCreate }) => {
                                 {...provided.dragHandleProps}
                                 ref={provided.innerRef}
                               >
-                                <td width="80%">{stage.title}</td>
+                                <td width="60%">{stage.title}</td>
+                                <td width="20%">{stage.type}</td>
                                 <td width="20%">
                                   <Link
                                     to={`/admin/stage/${stage._id}`}

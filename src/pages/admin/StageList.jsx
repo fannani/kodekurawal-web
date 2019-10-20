@@ -10,6 +10,8 @@ import AdminStageList from '../../components/admin/Stage/List';
 import { Formik, Form, Field } from 'formik';
 import { toast } from 'react-toastify';
 
+
+
 const StageList = ({
   history,
   match: {

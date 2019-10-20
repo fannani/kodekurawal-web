@@ -4,6 +4,12 @@ import { ADD_STAGE } from '../../../queries/stages';
 import { Field, Form, Formik } from 'formik';
 import Modal from 'react-bootstrap4-modal';
 
+const StageType =  {
+    PROGRAMMING : "PROGRAMMING",
+    MATERIAL : "MATERIAL",
+    QUIZ : "QUIZ",
+}
+
 const AdminStageCreateModal = ({ show, onClose, onSuccess, courseid }) => (
   <Modal visible={show} onClickBackdrop={onClose}>
     <div className="modal-header">
@@ -14,13 +20,15 @@ const AdminStageCreateModal = ({ show, onClose, onSuccess, courseid }) => (
         <Formik
           initialValues={{
             title: '',
+            type : StageType.PROGRAMMING
           }}
-          onSubmit={({ title }, { setSubmitting }) => {
+          onSubmit={({ title, type }, { setSubmitting }) => {
             setSubmitting(true);
             addStage({
               variables: {
                 title,
                 course: courseid,
+                type: type,
               },
             }).then(({ data: { addStage: result } }) => {
               setSubmitting(false);
@@ -40,6 +48,19 @@ const AdminStageCreateModal = ({ show, onClose, onSuccess, courseid }) => (
                       placeholder="title"
                       name="title"
                     />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="name">Type</label>
+                    <Field
+                      className="form-control"
+                      component="select"
+                      placeholder="title"
+                      name="type"
+                    >
+                      <option value="PROGRAMMING">Programming</option>
+                      <option value="MATERIAL">Material</option>
+                      <option value="QUIZ">Quiz</option>
+                    </Field>
                   </div>
                 </div>
               </div>

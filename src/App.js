@@ -7,6 +7,7 @@ import { ApolloLink } from 'apollo-link';
 import { onError } from 'apollo-link-error';
 import { createUploadLink } from 'apollo-upload-client';
 import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider as ApolloHooks} from '@apollo/react-hooks';
 import LoadingScreen from './components/UI/LoadingScreen';
 import { API_URL } from './config/config';
 import { ToastContainer } from 'react-toastify';
@@ -50,6 +51,7 @@ const getUserConfirmation = (dialogKey, callback) => {
 function App() {
   return (
     <ApolloProvider client={client}>
+    <ApolloHooks client={client}>
     <BrowserRouter getUserConfirmation={getUserConfirmation}>
       <Suspense fallback={<LoadingScreen />}>
         <ErrorBoundary>
@@ -62,7 +64,8 @@ function App() {
         <ToastContainer />
       </Suspense>
     </BrowserRouter>
-  </ApolloProvider>
+    </ApolloHooks>
+    </ApolloProvider>
   );
 }
 
