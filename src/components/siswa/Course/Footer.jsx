@@ -66,6 +66,9 @@ const SiswaCourseFooter = ({ className, course, stage, history,onMenuClick }) =>
 };
 
 const StyleCourseFooter = styled(SiswaCourseFooter)`
+  position: fixed;
+  width:100%;
+  bottom:0;
   .btn-menu {
     color: #ebebeb;
     height: 100%;

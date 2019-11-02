@@ -137,7 +137,7 @@ const MaterialType = ({stage}) => {
             </Field>
           </div>
           <div className="row">
-            <div className="col-8">
+            <div className="col-12">
               <ContentCreator
                 type={values.materialType}
                 body={values.body}
