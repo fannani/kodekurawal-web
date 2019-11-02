@@ -226,7 +226,24 @@ const Course = ({
                         <>
                           <div className="row flex-xl-nowrap">
                             { stages[0].type === 'QUIZ' ?
-                              <Quiz stage={stages[0]} /> :
+                              <Quiz stage={stages[0]} onFinish={(score) => {
+                                const starCount = calculateStars(
+                                  player.gameplay.currentTimer,
+                                  stages[0].time,
+                                  player.gameplay.life,
+                                );
+                                setIsPlay(false);
+                                setLifeResult(player.gameplay.life);
+                                setScoreResult(score);
+                                setShowModal(true);
+                                setStars(starCount);
+                                clearInterval(interval);
+
+                              }}   onWrongChoice={() => {
+                                player.setPlayerStatus(player.gameplay.score, player.gameplay.life - 1);
+                              }} onCorrectChoice={(score) => {
+                                player.setPlayerStatus(score, player.gameplay.life);
+                              }}/> :
                               <Coding interactive={interactive} reset={reset} result={result} editorId={editorId} stage={stages[0]} onScriptChange={(val) => {
                                 script = val;
                               }} />

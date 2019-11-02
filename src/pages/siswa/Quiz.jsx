@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components'
 import classnames from 'classnames'
 import Card from "../../components/UI/Card";
@@ -75,7 +75,7 @@ const Choice = ({value, text, state, disable, onClick, }) => {
   )
 }
 
-const Quiz = ({ className, stage : {quiz} }) => {
+const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectChoice}) => {
   const [choiceActive,setChoiceActive] = useState('');
   const [result,setResult] = useState('');
   const [choiceDisable, setChoiceDisable] = useState(0);
@@ -83,6 +83,16 @@ const Quiz = ({ className, stage : {quiz} }) => {
   const [progress, setProgress] = useState(0);
   const [score, setScore] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    if(isSubmitted){
+      if(!result){
+        onWrongChoice();
+      } else {
+        onCorrectChoice(score);
+      }
+    }
+  }, [isSubmitted])
   
   const onChoiceClick = (value) => {
     setChoiceActive(value);
@@ -91,7 +101,7 @@ const Quiz = ({ className, stage : {quiz} }) => {
   const addScore = 100/quiz.questions.length;
 
   const gameOver = () => {
-    alert(`Score Anda: ${score}`);
+    onFinish(score);
   }
 
   const submit = () => {
@@ -120,8 +130,6 @@ const Quiz = ({ className, stage : {quiz} }) => {
     setChoiceActive('');
     setChoiceDisable(0);
   }
-
-
 
   return (
     <Card className={classnames(className,"card col-10 offset-1")}>

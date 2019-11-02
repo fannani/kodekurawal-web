@@ -7,7 +7,7 @@ export default ({
                 }) => {
   const choice = [];
   const option = [];
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 4; i++) {
     choice.push(<Choice
       value={question.choice[i]}
       checked={(question.choice[i] === answer)}
