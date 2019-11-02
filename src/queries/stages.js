@@ -28,8 +28,20 @@ export const GET_STAGE_BY_PLAYER = gql`
       win
       exp_reward
       teory
+      type
       script
       language
+      quiz {
+        title
+        questions {
+          content
+          questionType 
+          choice 
+          answer 
+          score 
+        }
+        time
+      }
       course {
         name
         _id
@@ -37,6 +49,7 @@ export const GET_STAGE_BY_PLAYER = gql`
           _id
           index
           title
+          type
         }
         badge {
           _id

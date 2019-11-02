@@ -15,10 +15,6 @@ type Achievement {
   updated_at: String!
 }
 
-# The `Upload` scalar type represents a file upload.
-scalar Upload
-
-
 type AchievementDetail {
   _id: ID!
   achievement: ID!
@@ -192,7 +188,7 @@ type Mutation {
     index: Int
     time: Int
     exp_reward: Int
-    course: ID!
+    course: ID
     file: Upload
     script: String
     language: String
@@ -268,8 +264,8 @@ type Query {
 }
 
 type Question {
-  content: String!
-  questionType: QuestionType!
+  content: String
+  questionType: QuestionType
   choice: [String]
   answer: String
   score: Int!
@@ -345,6 +341,7 @@ type Stage {
   imageid: String
   script: String
   missions: [Mission]
+  quiz: [Quiz]
   course: Course
   updated_at: String!
 }
@@ -370,6 +367,9 @@ type TestCaseMission {
   updated_at: String!
 }
 
+# The `Upload` scalar type
+ represents a file upload.
+scalar Upload
 
 type User {
   _id: ID!

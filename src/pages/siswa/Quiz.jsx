@@ -4,12 +4,31 @@ import classnames from 'classnames'
 import Card from "../../components/UI/Card";
 import ProgressBar from "../../components/UI/ProgressBar";
 
+const Message = styled.p`
+  font-weight:bold;
+  font-size:24px;
+  color : ${props => ( props.submitted ? props.result ? '#58a700':'#ea2b2b' : '' ) };
+  position:absolute;
+  margin-left:50px;
+  bottom:16px;
+  
+`
+
 const ButtonSubmit = styled.button`
   margin-right:50px;
   width:120px;
   font-weight:500;
   margin-bottom:20px;
   padding:10px;
+  background-color : ${props => ( props.submitted ? props.result ? '#58a700':'#ea2b2b' : '' ) };
+  border-color: ${props => ( props.submitted ? props.result ? '#58a700':'#ea2b2b' : '' )};
+  :hover {
+    background-color : ${props => ( props.submitted ? props.result ? '#58a700':'#ea2b2b' : '' ) };
+      border-color: ${props => ( props.submitted ? props.result ? '#58a700':'#ea2b2b' : '' )};
+  }
+  :focus {
+    box-shadow: 0 0 0 0.2rem ${props => ( props.submitted ? props.result ? 'rgba(88,167,0,0.5)':'rgb(234,43,43,0.5)' : '' )};
+  }
 `
 
 const ChoiceText = styled.p`
@@ -32,7 +51,7 @@ const BottomBar = styled.div`
   border-bottom-right-radius: 10px !important;
   padding:10px;
   left: 0;
-  background-color: #B8F28B;
+  background-color: ${props => ( props.submitted ? props.result ? '#B8F28B':'#FFC1C1' : '' ) };
 `
 
 const Choice = ({value, text, state, disable, onClick, }) => {
@@ -56,57 +75,9 @@ const Choice = ({value, text, state, disable, onClick, }) => {
   )
 }
 
-const Quiz = ({ className }) => {
-  const data = [
-    {
-      _id:'1', 
-      question:'Soal 1 ini jawabannya?', 
-      choices: [
-        {value:'a', text:'Jawaban A'},
-        {value:'b', text:'Jawaban B'},
-        {value:'c', text:'Jawaban C'},
-        {value:'d', text:'Jawaban D'},
-      ],
-      answer: 'b'
-    },
-    {
-      _id:'2', 
-      question:'Soal 2 ini jawabannya?', 
-      choices: [
-        {value:'a', text:'Jawaban A'},
-        {value:'b', text:'Jawaban B'},
-        {value:'c', text:'Jawaban C'},
-        {value:'d', text:'Jawaban D'},
-      ],
-      answer: 'd'
-    },
-    {
-      _id:'3', 
-      question:'Soal 3 ini jawabannya?', 
-      choices: [
-        {value:'a', text:'Jawaban A'},
-        {value:'b', text:'Jawaban B'},
-        {value:'c', text:'Jawaban C'},
-        {value:'d', text:'Jawaban D'},
-      ],
-      answer: 'a'
-    },
-    {
-      _id:'4', 
-      question:'Soal 4 ini jawabannya?', 
-      choices: [
-        {value:'a', text:'Jawaban A'},
-        {value:'b', text:'Jawaban B'},
-        {value:'c', text:'Jawaban C'},
-        {value:'d', text:'Jawaban D'},
-      ],
-      answer: 'c'
-    }
-  ];
-  
+const Quiz = ({ className, stage : {quiz} }) => {
   const [choiceActive,setChoiceActive] = useState('');
-  const [questionCorrect,setQuestionCorrect] = useState('');
-  const [showMessage,setShowMessage] = useState('none');
+  const [result,setResult] = useState('');
   const [choiceDisable, setChoiceDisable] = useState(0);
   const [indexQuestion, setIndexQuestion] = useState(0);
   const [progress, setProgress] = useState(0);
@@ -117,7 +88,7 @@ const Quiz = ({ className }) => {
     setChoiceActive(value);
   }
 
-  const addScore = 100/data.length;
+  const addScore = 100/quiz.questions.length;
 
   const gameOver = () => {
     alert(`Score Anda: ${score}`);
@@ -127,20 +98,19 @@ const Quiz = ({ className }) => {
     if(isSubmitted){
       setIsSubmitted(false);
       resetValue();
-      if ((indexQuestion+1) < data.length) {
+      if ((indexQuestion+1) < quiz.questions.length) {
         setIndexQuestion(indexQuestion+1);
-        setProgress(progress+addScore)
       } else {
         gameOver();
       }
     } else {
-      if (choiceActive === data[indexQuestion].answer) {
-        setQuestionCorrect('y');
+      setProgress(progress+addScore)
+      if (choiceActive === quiz.questions[indexQuestion].answer) {
+        setResult(true);
         setScore(score + addScore);
       } else {
-        setQuestionCorrect('n');
+        setResult(false);
       }
-      setShowMessage('block');
       setChoiceDisable(1);
       setIsSubmitted(true);
     }
@@ -148,8 +118,6 @@ const Quiz = ({ className }) => {
 
   const resetValue = () => {
     setChoiceActive('');
-    setQuestionCorrect('');
-    setShowMessage('none');
     setChoiceDisable(0);
   }
 
@@ -159,42 +127,38 @@ const Quiz = ({ className }) => {
     <Card className={classnames(className,"card col-10 offset-1")}>
       <ProgressBar progress={progress}/>
         <div >
-          {/*<div */}
-          {/*  className={`alert ${questionCorrect === 'y'?'alert-success':'alert-danger'}`} */}
-          {/*  role="alert" */}
-          {/*  style={{display:showMessage}}>*/}
-          {/*  {`${questionCorrect === 'y'?'Mantap, jawaban kamu benar :)':'Ups, jawaban kamu salah :('}`}*/}
-          {/*</div>*/}
           <div className="col-8 offset-2" style={{marginTop: "10px"}}>
-            <QuestionText>{data[indexQuestion].question}</QuestionText>
-            { data[indexQuestion].choices.map(choice => (
+            <QuestionText>{quiz.questions[indexQuestion].content}</QuestionText>
+            { quiz.questions[indexQuestion].choice.map(choice => (
               <Choice
-                value={choice.value} 
-                text={choice.text} 
+                value={choice}
+                text={choice}
                 state={(() => {
-                  if(choice.value === data[indexQuestion].answer && isSubmitted ){
+                  if(choice === quiz.questions[indexQuestion].answer && isSubmitted ){
                      return "IS_ANSWER" 
                   }
-                  if(choiceActive === choice.value && choice.value !== data[indexQuestion].answer && isSubmitted  ){
+                  if(choiceActive === choice && choice !== quiz.questions[indexQuestion].answer && isSubmitted  ){
                     return "WRONG_ANSWER"
                   }
-                  if(choiceActive === choice.value){ 
+                  if(choiceActive === choice){
                     return "SELECTED" 
-                  } 
-                  
+                  }
                 })()} 
                 disable={choiceDisable ? true : false}
                 onClick={onChoiceClick}/>
             ))}
 
           </div>
-          <BottomBar>
+          <BottomBar submitted={isSubmitted} result={result}>
+            <Message submitted={isSubmitted} result={result} >
+              {isSubmitted ? result ? 'Selamat jawaban anda benar' : 'Jawaban anda salah' : '' }
+            </Message>
             <ButtonSubmit
+              submitted={isSubmitted} result={result}
               className="btn btn-primary float-right"
               style={{marginTop:"20px", textAlign:"center"}} onClick={submit}>
-              {isSubmitted ? 'Lanjut' : 'Periksa'}
+              {isSubmitted ? indexQuestion < quiz.questions.length - 1 ? 'Lanjut' : 'Selesai' : 'Periksa'}
             </ButtonSubmit>
-
           </BottomBar>
         </div>
       
