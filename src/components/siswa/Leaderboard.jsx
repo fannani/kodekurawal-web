@@ -10,7 +10,7 @@ const Leaderboard = ({ data, className }) => (
     <div className="card" style={{ width: '100%', marginTop: '10px' }}>
       <div className="card-body">
         <ul className="list-group">
-          {data[0].player !== null &&
+          {data.length > 0 && data[0].player !== null &&
             data.map((leader, index) => (
               <li
                 className="list-group-item d-flex justify-content-between align-items-center"

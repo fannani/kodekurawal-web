@@ -25,6 +25,7 @@ import {
 import Loader from '../../components/siswa/Course/Loader';
 import Coding from "./Coding";
 import Quiz from "./Quiz";
+import Material from "./Material";
 //TODO: Output default mode
 //TODO: useRef in interval (Riset)
 //TODO: useRef in script
@@ -225,10 +226,66 @@ const Course = ({
                       {({ result }) => (
                         <>
                           <div className="row flex-xl-nowrap">
-                            {/*<Coding interactive={interactive} reset={reset} result={result} editorId={editorId} stage={stages[0]} onScriptChange={(val) => {*/}
-                            {/*  script = val;*/}
-                            {/*}} />*/}
-                            <Quiz />
+                            { stages[0].type === 'QUIZ' ?
+                              <Quiz stage={stages[0]} onFinish={(score) => {
+                                const starCount = calculateStars(
+                                  player.gameplay.currentTimer,
+                                  stages[0].time,
+                                  player.gameplay.life,
+                                );
+                                setIsPlay(false);
+                                setLifeResult(player.gameplay.life);
+                                setScoreResult(score);
+                                setShowModal(true);
+                                setStars(starCount);
+                                clearInterval(interval);
+
+                                if (player.gameplay.life > 0) {
+                                  player.addExp(stages[0].exp_reward);
+                                  const addScoreData = {
+                                    variables: {
+                                      player: player.user.userdetailid,
+                                      course: stages[0].course._id,
+                                      stage: stageid,
+                                      score,
+                                      time: player.gameplay.currentTimer,
+                                      stars: starCount,
+                                      script : '',
+                                    },
+                                  };
+                                  const process = async function() {
+                                    if (
+                                      stages[0].index === stages[0].course.stages.length
+                                    ) {
+                                      await player.giveAchievement(
+                                        '5c26270a8c56d9072422e3ee',
+                                      );
+                                      if (stages[0].course.badge) {
+                                        await player.addBadge(
+                                          stages[0].course.badge._id,
+                                        );
+                                      }
+                                    }
+                                    const result = await addScore(addScoreData);
+                                    player.updateStars(
+                                      result.data.addScore.player.stars,
+                                    );
+                                  };
+                                  process();
+                                }
+
+
+                              }}   onWrongChoice={() => {
+                                player.setPlayerStatus(player.gameplay.score, player.gameplay.life - 1);
+                              }} onCorrectChoice={(score) => {
+                                player.setPlayerStatus(score, player.gameplay.life);
+                              }}/> : stages[0].type === 'MATERIAL' ?
+                                <Material stage={stages[0]} />
+                                  :<Coding interactive={interactive} reset={reset} result={result} editorId={editorId} stage={stages[0]} onScriptChange={(val) => {
+                                script = val;
+                              }} />
+                            }
+
                           </div>
                           <SiswaCourseFooter
                             course={stages[0].course}

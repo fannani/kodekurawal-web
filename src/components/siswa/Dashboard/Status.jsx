@@ -32,7 +32,7 @@ const Status = ({ player, data, onAvaClick }) => (
             onClick={onAvaClick}
             style={{
               backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/kodekurawal-ab777.appspot.com/o/${
-                data.players[0].avatar.imageid
+                data.players[0].avatar ? data.players[0].avatar.imageid : ''
               }?alt=media")`,
             }}
           />

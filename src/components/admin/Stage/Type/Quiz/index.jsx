@@ -16,7 +16,7 @@ import {UPDATE_STAGE} from "../../../../../queries/stages";
 const initialQuestion = {
   stage: '',
   questionType: questionType.MULTIPLE_CHOICE,
-  choice: ['', '', '', '', ''],
+  choice: ['', '', '', ''],
   answer: '',
   score: 30,
 };

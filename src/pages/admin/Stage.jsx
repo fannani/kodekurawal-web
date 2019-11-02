@@ -22,10 +22,6 @@ const ProgrammingType = ({stage, addMission, missions, language}) => {
   </>)
 }
 
-
-
-
-
 const Type = ({material, quiz, programming, type}) => {
   if(type === "PROGRAMMING"){
     return programming;
