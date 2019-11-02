@@ -4,10 +4,40 @@ import classnames from 'classnames'
 import Card from "../../components/UI/Card";
 import ProgressBar from "../../components/UI/ProgressBar";
 
-const Choice = ({value, text, state, disable, onClick, }) => {
-  const color = (state === "SELECTED") ? 'blue' : (state === "IS_ANSWER") ? 'green' : (state === "WRONG_ANSWER") ? 'red' : '#E5E5E5';
-  const pointer_event = (disable) ? 'none' : 'auto';
+const ButtonSubmit = styled.button`
+  margin-right:50px;
+  width:120px;
+  font-weight:500;
+  margin-bottom:20px;
+  padding:10px;
+`
 
+const ChoiceText = styled.p`
+  margin:0px;
+  padding:0px;
+  font-weight:500;
+  margin-left:10px;
+`
+const QuestionText = styled.p`
+  font-weight : 500;
+  font-size:19px;
+  margin-bottom:20px;
+`
+
+const BottomBar = styled.div`
+  position:absolute;
+  width: 100% ;
+  bottom:0;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 10px !important;
+  padding:10px;
+  left: 0;
+  background-color: #B8F28B;
+`
+
+const Choice = ({value, text, state, disable, onClick, }) => {
+  const color = (state === "SELECTED") ? '#1FB1F7' : (state === "IS_ANSWER") ? '#93D333' : (state === "WRONG_ANSWER") ? '#EF494F' : '#E5E5E5';
+  const pointer_event = (disable) ? 'none' : 'auto';
   return (
     <div className="card" 
         style={{
@@ -21,7 +51,7 @@ const Choice = ({value, text, state, disable, onClick, }) => {
             onClick(value); // memanggil fungsi onClick dengan parameter value (jawaban :a,b,c,d)
          }}
     >
-        <h6>{text}</h6>
+        <ChoiceText>{text}</ChoiceText>
     </div>
   )
 }
@@ -77,75 +107,75 @@ const Quiz = ({ className }) => {
   const [choiceActive,setChoiceActive] = useState('');
   const [questionCorrect,setQuestionCorrect] = useState('');
   const [showMessage,setShowMessage] = useState('none');
-  const [showBtnNext,setShowBtnNext] = useState(false);
   const [choiceDisable, setChoiceDisable] = useState(0);
   const [indexQuestion, setIndexQuestion] = useState(0);
   const [progress, setProgress] = useState(0);
   const [score, setScore] = useState(0);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   
   const onChoiceClick = (value) => {
-    //value : jawaban=> a,b,c,d
     setChoiceActive(value);
   }
 
   const addScore = 100/data.length;
 
-  const checkAnswer = () => {
-    if (choiceActive === data[indexQuestion].answer) {
-      setQuestionCorrect('y');
-      setScore(score + addScore);
+  const gameOver = () => {
+    alert(`Score Anda: ${score}`);
+  }
+
+  const submit = () => {
+    if(isSubmitted){
+      setIsSubmitted(false);
+      resetValue();
+      if ((indexQuestion+1) < data.length) {
+        setIndexQuestion(indexQuestion+1);
+        setProgress(progress+addScore)
+      } else {
+        gameOver();
+      }
     } else {
-      setQuestionCorrect('n');
+      if (choiceActive === data[indexQuestion].answer) {
+        setQuestionCorrect('y');
+        setScore(score + addScore);
+      } else {
+        setQuestionCorrect('n');
+      }
+      setShowMessage('block');
+      setChoiceDisable(1);
+      setIsSubmitted(true);
     }
-    setShowMessage('block');
-    setShowBtnNext('inline');
-    setChoiceDisable(1);
   }
 
   const resetValue = () => {
     setChoiceActive('');
     setQuestionCorrect('');
     setShowMessage('none');
-    setShowBtnNext('none');
     setChoiceDisable(0);
   }
 
-  const nextOrFinish = () => {
-    if ((indexQuestion+1) < data.length) {
-      // Next
-      resetValue();
-      setIndexQuestion(indexQuestion+1);
-      setProgress(progress+addScore)
-    } else {
-      //Finish
-      resetValue();
-      alert(`Score Anda: ${score}`);
-    }
-  }
+
 
   return (
     <Card className={classnames(className,"card col-10 offset-1")}>
-      
       <ProgressBar progress={progress}/>
-       
         <div >
-          <div 
-            className={`alert ${questionCorrect === 'y'?'alert-success':'alert-danger'}`} 
-            role="alert" 
-            style={{display:showMessage}}>
-            {`${questionCorrect === 'y'?'Mantap, jawaban kamu benar :)':'Ups, jawaban kamu salah :('}`}
-          </div>
+          {/*<div */}
+          {/*  className={`alert ${questionCorrect === 'y'?'alert-success':'alert-danger'}`} */}
+          {/*  role="alert" */}
+          {/*  style={{display:showMessage}}>*/}
+          {/*  {`${questionCorrect === 'y'?'Mantap, jawaban kamu benar :)':'Ups, jawaban kamu salah :('}`}*/}
+          {/*</div>*/}
           <div className="col-8 offset-2" style={{marginTop: "10px"}}>
-            <h3 style={{height: "100px"}}>{data[indexQuestion].question}</h3>
+            <QuestionText>{data[indexQuestion].question}</QuestionText>
             { data[indexQuestion].choices.map(choice => (
               <Choice
                 value={choice.value} 
                 text={choice.text} 
                 state={(() => {
-                  if(choice.value === data[indexQuestion].answer  ){
+                  if(choice.value === data[indexQuestion].answer && isSubmitted ){
                      return "IS_ANSWER" 
                   }
-                  if(choiceActive === choice.value && choice.value !== data[indexQuestion].answer  ){
+                  if(choiceActive === choice.value && choice.value !== data[indexQuestion].answer && isSubmitted  ){
                     return "WRONG_ANSWER"
                   }
                   if(choiceActive === choice.value){ 
@@ -156,17 +186,16 @@ const Quiz = ({ className }) => {
                 disable={choiceDisable ? true : false}
                 onClick={onChoiceClick}/>
             ))}
-              <button 
-                  className="btn btn-primary float-right" 
-                  style={{marginTop:"20px", textAlign:"center"}} onClick={checkAnswer}>
-                    Periksa
-              </button>
-              <button 
-                  className="btn btn-success float-right"
-                  style={{marginTop:"20px", textAlign:"center", display: showBtnNext}} onClick={nextOrFinish}>
-                    {((indexQuestion+1) < data.length) ? 'Lanjut' : 'Selesai'}
-              </button>
+
           </div>
+          <BottomBar>
+            <ButtonSubmit
+              className="btn btn-primary float-right"
+              style={{marginTop:"20px", textAlign:"center"}} onClick={submit}>
+              {isSubmitted ? 'Lanjut' : 'Periksa'}
+            </ButtonSubmit>
+
+          </BottomBar>
         </div>
       
     </Card>

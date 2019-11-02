@@ -16,7 +16,6 @@ const getUserDetail = async function(user) {
 };
 
 const login = (email, password, role) => {
-    console.log(`${SERVER_URL}auth/login`);
     return  axios({
         url: `${SERVER_URL}auth/login`,
         method: 'post',
