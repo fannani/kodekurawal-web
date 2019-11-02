@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const GET_PLAYERLEVEL = gql`
   {
-    playerlevel {
+    playerLevel {
       _id
       level
       exp_req

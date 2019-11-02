@@ -47,7 +47,7 @@ const GameSetting = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            {data.playerlevel.map(level => (
+                            {data.playerLevel.map(level => (
                               <tr>
                                 <td>{level.level}</td>
                                 <td>{level.exp_req}</td>
@@ -74,13 +74,13 @@ const GameSetting = () => {
                     <Mutation
                       mutation={ADD_PLAYERLEVEL}
                       update={(cache, { data: { addPlayerLevel } }) => {
-                        const { playerlevel } = cache.readQuery({
+                        const { playerLevel } = cache.readQuery({
                           query: GET_PLAYERLEVEL,
                         });
                         cache.writeQuery({
                           query: GET_PLAYERLEVEL,
                           data: {
-                            playerlevel: playerlevel.concat([addPlayerLevel]),
+                            playerLevel: playerLevel.concat([addPlayerLevel]),
                           },
                         });
                       }}
@@ -170,13 +170,13 @@ const GameSetting = () => {
                     <Mutation
                       mutation={ADD_PLAYERLEVEL}
                       update={(cache, { data: { addPlayerLevel } }) => {
-                        const { playerlevel } = cache.readQuery({
+                        const { playerLevel } = cache.readQuery({
                           query: GET_PLAYERLEVEL,
                         });
                         cache.writeQuery({
                           query: GET_PLAYERLEVEL,
                           data: {
-                            playerlevel: playerlevel.concat([addPlayerLevel]),
+                            playerLevel: playerLevel.concat([addPlayerLevel]),
                           },
                         });
                       }}
