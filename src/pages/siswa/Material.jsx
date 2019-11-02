@@ -1,7 +1,8 @@
-import React from 'react';
-import classnames from "classnames";
+import React, {useEffect, useState} from 'react';
 import Card from "../../components/UI/Card";
 import styled from "styled-components";
+
+import HtmlToReact  from 'html-to-react';
 
 const Title = styled.h5`
   margin-left:auto;
@@ -16,57 +17,22 @@ const Container = styled(Card)`
   margin-bottom:80px
 `
 const Content = styled.div`
-  
+  padding-left:10px;
+  padding-right:10px;
 `
 const Footer = styled.div`
   margin-top:10px;
 `
 
+const htmlToReactParser = new HtmlToReact.Parser();
+
 const Material = ({ stage}) => {
+  const content = htmlToReactParser.parse(stage.material.body);
   return (
     <Container className="card col-10 offset-1">
-      <Title>INI ADALAH JUDUL</Title>
+      <Title>{stage.title}</Title>
       <Content>
-        ini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sd
-        ini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sd
-        ini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sd
-        ini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sdini adalah insia sia sidnasodiaj soid jaoisj dioa oia jidj aosj doia iufdh fu ih iu hishiuahdf hsidfh ] sfhia ]
-        f aius hdfiuh suhdf iushd fiuhs diufh sidufh sudh ush dguh  ajj dsiajsk dajs dia j iajs dij aisjd iajs diaj sjd asd
-        ad asjd aijs dijas dij asijd a sd
+        { content }
       </Content>
       <Footer>
         <button style={{float:'right'}  }className="btn btn-primary" >Selesai</button>
