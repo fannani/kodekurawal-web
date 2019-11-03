@@ -26,16 +26,20 @@ const Footer = styled.div`
 
 const htmlToReactParser = new HtmlToReact.Parser();
 
-const Material = ({ stage}) => {
-  const content = htmlToReactParser.parse(stage.material.body);
+const Material = ({ stage, onFinish}) => {
+  const [content,setContent] = useState('');
+
+  useEffect(() => {
+    setContent(htmlToReactParser.parse(stage.material.body));
+  }, []);
   return (
     <Container className="card col-10 offset-1">
       <Title>{stage.title}</Title>
-      <Content>
-        { content }
-      </Content>
+      <Content>{content}</Content>
       <Footer>
-        <button style={{float:'right'}  }className="btn btn-primary" >Selesai</button>
+        <button style={{float:'right'}  }className="btn btn-primary" onClick={() => {
+          onFinish();
+        }}>Selesai</button>
       </Footer>
     </Container>
   )

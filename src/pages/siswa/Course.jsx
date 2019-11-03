@@ -26,6 +26,7 @@ import Loader from '../../components/siswa/Course/Loader';
 import Coding from "./Coding";
 import Quiz from "./Quiz";
 import Material from "./Material";
+import {Link} from "react-router-dom";
 //TODO: Output default mode
 //TODO: useRef in interval (Riset)
 //TODO: useRef in script
@@ -76,17 +77,32 @@ const Course = ({
   const [scoreResult, setScoreResult] = useState(0);
   const [lifeResult, setLifeResult] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [fromMaterial, setFromMaterial] = useState(false);
   const [isPlay, setIsPlay] = useState(true);
   const [editorId, setEditorId] = useState(() => shortid.generate());
   const [showModal, setShowModal] = useState(false);
   const [stars, setStars] = useState([]);
   const [showOutOfEnergy, setShowOutOfEnergy] = useState(false);
+  const [stage, setStage] = useState({});
   const [tourOpen, setTourOpen] = useState(
     player.user.userdetail.tutorial[0] === null ||
       player.user.userdetail.tutorial.length === 0
       ? true
       : player.user.userdetail.tutorial[0],
   );
+
+  useEffect(() => {
+    if(fromMaterial){
+      if (stage.index < stage.course.stages.length) {
+        const next = stage.course.stages.find(
+          data => data.index === stage.index + 1,
+        );
+        history.push(`/play/${next._id}`);
+      } else {
+        history.push(`/course/${stage.course._id}`)
+      }
+    }
+  },[ fromMaterial])
 
   const reset = () => {
     setShowModal(false);
@@ -280,12 +296,15 @@ const Course = ({
                               }} onCorrectChoice={(score) => {
                                 player.setPlayerStatus(score, player.gameplay.life);
                               }}/> : stages[0].type === 'MATERIAL' ?
-                                <Material stage={stages[0]} />
+                                <Material stage={stages[0]} onFinish={() => {
+                                  setStage(stages[0]);
+                                  setIsPlay(false);
+                                  setFromMaterial(true);
+                                }} />
                                   :<Coding interactive={interactive} reset={reset} result={result} editorId={editorId} stage={stages[0]} onScriptChange={(val) => {
                                 script = val;
                               }} />
                             }
-
                           </div>
                           <SiswaCourseFooter
                             course={stages[0].course}
