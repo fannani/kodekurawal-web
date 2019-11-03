@@ -22,7 +22,7 @@ import {
   SET_TUTORIAL_FAILURE,
   SET_TUTORIAL_SUCCESS,
   SET_TUTORIAL_REQUEST,
-  UPDATE_STARS,
+  UPDATE_STARS, SET_CONTENT_TYPE,
 } from '../data/siswa/types';
 import {
   setPlayerStatus,
@@ -156,6 +156,7 @@ const usePlayer = () => {
     );
   };
 
+
   return {
     login,
     logout,
@@ -183,6 +184,9 @@ const usePlayer = () => {
     updateStars: stars => {
       dispatch({ type: UPDATE_STARS, stars });
     },
+    setContentType: contentType => {
+      dispatch({type : SET_CONTENT_TYPE, contentType});
+    }
   };
 };
 

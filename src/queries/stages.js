@@ -42,6 +42,11 @@ export const GET_STAGE_BY_PLAYER = gql`
         }
         time
       }
+      material {
+        body 
+        materialType 
+        url
+      }
       course {
         name
         _id

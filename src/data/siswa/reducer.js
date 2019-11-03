@@ -8,7 +8,7 @@ import {
   ADD_ENERGY_SUCCESS,
   ADD_EXP_SUCCESS,
   UPDATE_STARS,
-  SET_TUTORIAL_SUCCESS,
+  SET_TUTORIAL_SUCCESS, SET_CONTENT_TYPE,
 } from './types';
 
 export const initialState = {
@@ -69,6 +69,11 @@ export const reducer = (state, action) => {
         ...state,
         gameplay: { ...gameplay, life: action.life, score: action.score },
       };
+    case SET_CONTENT_TYPE:
+      return {
+        ...state,
+        gameplay: { ...gameplay, contentType: action.contentType},
+      }
     case SET_PLAY_MODE:
       return { ...state, gameplay: { ...gameplay, play: action.play } };
 
