@@ -255,7 +255,6 @@ const Course = ({
                                 setShowModal(true);
                                 setStars(starCount);
                                 clearInterval(interval);
-
                                 if (player.gameplay.life > 0) {
                                   player.addExp(stages[0].exp_reward);
                                   const addScoreData = {
@@ -289,8 +288,6 @@ const Course = ({
                                   };
                                   process();
                                 }
-
-
                               }}   onWrongChoice={() => {
                                 player.setPlayerStatus(player.gameplay.score, player.gameplay.life - 1);
                               }} onCorrectChoice={(score) => {
@@ -301,7 +298,7 @@ const Course = ({
                                   setIsPlay(false);
                                   setFromMaterial(true);
                                 }} />
-                                  :<Coding interactive={interactive} reset={reset} result={result} editorId={editorId} stage={stages[0]} onScriptChange={(val) => {
+                                  : <Coding interactive={interactive} reset={reset} result={result} editorId={editorId} stage={stages[0]} onScriptChange={(val) => {
                                 script = val;
                               }} />
                             }
