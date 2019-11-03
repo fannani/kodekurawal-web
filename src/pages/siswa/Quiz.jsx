@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import classnames from 'classnames'
 import Card from "../../components/UI/Card";
 import ProgressBar from "../../components/UI/ProgressBar";
+import HtmlToReact from "html-to-react";
 
 const Message = styled.p`
   font-weight:bold;
@@ -75,6 +76,9 @@ const Choice = ({value, text, state, disable, onClick, }) => {
   )
 }
 
+const htmlToReactParser = new HtmlToReact.Parser();
+
+
 const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectChoice}) => {
   const [choiceActive,setChoiceActive] = useState('');
   const [result,setResult] = useState('');
@@ -136,7 +140,7 @@ const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectCh
       <ProgressBar progress={progress}/>
         <div >
           <div className="col-8 offset-2" style={{marginTop: "10px"}}>
-            <QuestionText>{quiz.questions[indexQuestion].content}</QuestionText>
+            <QuestionText>{htmlToReactParser.parse(quiz.questions[indexQuestion].content)}</QuestionText>
             { quiz.questions[indexQuestion].choice.map(choice => (
               <Choice
                 value={choice}

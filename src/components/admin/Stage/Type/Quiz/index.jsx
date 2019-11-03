@@ -7,9 +7,13 @@ import { toast } from 'react-toastify';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import MultipleChoice from './Type/MultipleChoice';
 import Essay from './Type/Essay';
+import CKEditor from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import {GET_QUIZ, UPDATE_QUIZ, questionType} from "../../../../../queries/quiz";
 import {UPDATE_STAGE} from "../../../../../queries/stages";
+import UploadAdapter from "../../../../../utils/UploadAdapter";
+import {UPLOAD_FILE} from "../../../../../queries/file";
 
 // TODO : Create tag for answer essay input, Hide score input
 
@@ -120,29 +124,22 @@ export default ({ stage, history }) => {
                         </h5>
                         <div className="form-group">
                           <label htmlFor="content">Question</label>
-                          <Field
-                            type="text"
-                            name={`questions.${index}.content`}
-                            className="form-control"
-                            placeholder="Question"
-                            required
-                          />
-                          {/* <div className="row"> */}
-                          {/*  <div className="col-8"> */}
-                          {/* <CKEditor */}
-                          {/*  editor={ClassicEditor} */}
-                          {/*  data={question.content} */}
-                          {/*  onInit={(editor) => { */}
-                          {/*    editor.plugins.get('FileRepository').createUploadAdapter = function (loader) { */}
-                          {/*      return new UploadAdapter(loader, client, UPLOAD_FILE); */}
-                          {/*    }; */}
-                          {/*  }} */}
-                          {/*  onChange={(event, editor) => { */}
-                          {/*    setFieldValue(`questions.${index}.content`, editor.getData()); */}
-                          {/*  }} */}
-                          {/* /> */}
-                          {/*  </div> */}
-                          {/* </div> */}
+                           <div className="row">
+                            <div className="col-12">
+                               <CKEditor
+                                editor={ClassicEditor}
+                                data={question.content}
+                                onInit={(editor) => {
+                                  editor.plugins.get('FileRepository').createUploadAdapter = function (loader) {
+                                    return new UploadAdapter(loader, client, UPLOAD_FILE);
+                                  };
+                                }}
+                                onChange={(event, editor) => {
+                                  setFieldValue(`questions.${index}.content`, editor.getData());
+                                }}
+                               />
+                            </div>
+                           </div>
                         </div>
                         <div className="form-group">
                           <label htmlFor="content">Type</label>
