@@ -6,6 +6,7 @@ export const GET_COURSES = gql`
       _id
       name
       imageid
+      desc
     }
   }
 `;
@@ -51,6 +52,7 @@ export const ADD_COURSE = gql`
     addCourse(file: $file, name: $name, desc: $desc) {
       _id
       name
+      imageid
       desc
     }
   }

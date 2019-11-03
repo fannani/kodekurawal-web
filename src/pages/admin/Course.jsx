@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { ADD_COURSE, GET_COURSES } from '../../queries/courses';
 import Card from '../../components/UI/Card';
 import { DELETE_COURSE } from '../../queries/courses';
+import {GET_TESTCASE_MISSION} from "../../queries/missions";
 
 const Course = ({ history }) => {
   const [delConfirm, setDelConfirm] = useState(false);
@@ -24,7 +25,6 @@ const Course = ({ history }) => {
   const success = id => {
     setShowModal(false);
     setIdCourse(id);
-
     history.push(`/admin/course/${idCourse}`);
   };
   return (
@@ -92,7 +92,18 @@ const Course = ({ history }) => {
                         <h5 className="modal-title">Add Course</h5>
                       </div>
 
-                      <Mutation mutation={ADD_COURSE}>
+                      <Mutation mutation={ADD_COURSE}
+                                update={(cache, { data: { addCourse } }) => {
+                                  const { courses } = cache.readQuery({
+                                    query: GET_COURSES,
+                                  });
+                                  cache.writeQuery({
+                                    query : GET_COURSES,
+                                    data: {
+                                      courses: [...courses, addCourse],
+                                    },
+                                  })
+                                }}>
                         {addCourse => (
                           <Formik
                             initialValues={{
