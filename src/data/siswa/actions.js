@@ -1,5 +1,5 @@
 import {
-  RESET_TIMER,
+  RESET_TIMER, SET_CONTENT_TYPE,
   SET_PLAY_MODE,
   SET_PLAYER_STATUS,
   UPDATE_TIMER,
@@ -10,6 +10,11 @@ export const setPlayerStatus = (score, life) => ({
   score,
   life,
 });
+
+export const setContentType = (contentType) => ({
+  type: SET_CONTENT_TYPE,
+  contentType,
+})
 
 export const setPlayMode = play => ({
   type: SET_PLAY_MODE,

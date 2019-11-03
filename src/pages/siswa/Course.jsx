@@ -293,10 +293,43 @@ const Course = ({
                               }} onCorrectChoice={(score) => {
                                 player.setPlayerStatus(score, player.gameplay.life);
                               }}/> : stages[0].type === 'MATERIAL' ?
+
                                 <Material stage={stages[0]} onFinish={() => {
                                   setStage(stages[0]);
                                   setIsPlay(false);
                                   setFromMaterial(true);
+
+                                  player.addExp(stages[0].exp_reward);
+                                  const addScoreData = {
+                                    variables: {
+                                      player: player.user.userdetailid,
+                                      course: stages[0].course._id,
+                                      stage: stageid,
+                                      score : 100,
+                                      time: player.gameplay.currentTimer,
+                                      stars: [true,true,true],
+                                      script : '',
+                                    },
+                                  };
+                                  const process = async function() {
+                                    if (
+                                      stages[0].index === stages[0].course.stages.length
+                                    ) {
+                                      await player.giveAchievement(
+                                        '5c26270a8c56d9072422e3ee',
+                                      );
+                                      if (stages[0].course.badge) {
+                                        await player.addBadge(
+                                          stages[0].course.badge._id,
+                                        );
+                                      }
+                                    }
+                                    const result = await addScore(addScoreData);
+                                    player.updateStars(
+                                      result.data.addScore.player.stars,
+                                    );
+                                  };
+                                  process();
                                 }} />
                                   : <Coding interactive={interactive} reset={reset} result={result} editorId={editorId} stage={stages[0]} onScriptChange={(val) => {
                                 script = val;

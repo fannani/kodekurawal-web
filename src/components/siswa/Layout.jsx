@@ -32,6 +32,7 @@ const Layout = () => {
       <Header
         play={player.gameplay.play}
         life={player.gameplay.life}
+        isMaterial={player.gameplay.isMaterial}
         score={player.gameplay.score}
         time={player.gameplay.timerText}
         logout={onLogout}
