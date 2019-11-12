@@ -27,6 +27,7 @@ import Coding from "./Coding";
 import Quiz from "./Quiz";
 import Material from "./Material";
 import {Link} from "react-router-dom";
+import styled from 'styled-components';
 //TODO: Output default mode
 //TODO: useRef in interval (Riset)
 //TODO: useRef in script
@@ -34,6 +35,11 @@ import {Link} from "react-router-dom";
 let script = '';
 let interval = null;
 const energyNeed = 20;
+
+const Container = styled.div`
+  background-color:${props => props.theme.backgroundColor};
+`
+
 const tour = [
   {
     selector: '#teory',
@@ -130,7 +136,7 @@ const Course = ({
     [stageid],
   );
   return (
-    <div id="container">
+    <Container id="container">
       <Query
         query={GET_STAGE_BY_PLAYER}
         variables={{ id: stageid, playerid: player.user.userdetailid }}
@@ -397,7 +403,7 @@ const Course = ({
           }
         }}
       />
-    </div>
+    </Container>
   );
 };
 

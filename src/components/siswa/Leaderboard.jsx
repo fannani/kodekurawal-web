@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
 
+const Container = styled.div`
+  border: ${props => props.theme.cardBorder};
+
+`
+
 const Leaderboard = ({ data, className }) => (
   <div className={classnames('row', className)}>
     <h2 style={{ marginLeft: '30px', fontSize: '20px', marginTop: '24px' }}>
       Leaderboard
     </h2>
-    <div className="card" style={{ width: '100%', marginTop: '10px' }}>
+    <Container className="card" style={{ width: '100%', marginTop: '10px' }}>
       <div className="card-body">
         <ul className="list-group">
           {data.length > 0 && data[0].player !== null &&
@@ -24,7 +29,7 @@ const Leaderboard = ({ data, className }) => (
             ))}
         </ul>
       </div>
-    </div>
+    </Container>
   </div>
 );
 const StyledLeaderboard = styled(Leaderboard)`

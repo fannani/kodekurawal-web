@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
-import styled from 'styled-components';
+import styled, {withTheme} from 'styled-components';
 
-const SiswaCourseFooter = ({ className, course, stage, history,onMenuClick }) => {
+const SiswaCourseFooter = ({ className, course, stage, history,onMenuClick, theme }) => {
   const [prev, setPrev] = useState('');
   const [next, setNext] = useState('');
   useEffect(
@@ -26,7 +26,7 @@ const SiswaCourseFooter = ({ className, course, stage, history,onMenuClick }) =>
   return (
     <div
       className={classnames(className, 'row', 'flex-xl-nowrap')}
-      style={{ height: '50px', backgroundColor: '#343A40' }}
+      style={{ height: '50px', backgroundColor: theme.primaryColor }}
     >
       <div className="col-4">
         <button className="btn btn-primary-outline btn-menu" onClick={onMenuClick} type="button">
@@ -65,7 +65,7 @@ const SiswaCourseFooter = ({ className, course, stage, history,onMenuClick }) =>
   );
 };
 
-const StyleCourseFooter = styled(SiswaCourseFooter)`
+const StyleCourseFooter = styled(withTheme(SiswaCourseFooter))`
   position: fixed;
   width:100%;
   bottom:0;

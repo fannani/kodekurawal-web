@@ -9,10 +9,13 @@ import { createUploadLink } from 'apollo-upload-client';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloHooks} from '@apollo/react-hooks';
 import LoadingScreen from './components/UI/LoadingScreen';
-import { API_URL } from './config/config';
+import {API_URL, THEME} from './config/config';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ErrorBoundary from './components/ErrorBoundary';
+import {ThemeProvider} from "styled-components";
+import sainfikasi from "./themes/sainfikasi";
+import kodekurawal from "./themes/kodekurawal";
 
 const AdminApp = lazy(() => import('./components/admin/App'));
 const SiswaApp = lazy(() => import('./components/siswa/App'));
@@ -50,22 +53,24 @@ const getUserConfirmation = (dialogKey, callback) => {
 
 function App() {
   return (
-    <ApolloProvider client={client}>
-    <ApolloHooks client={client}>
-    <BrowserRouter getUserConfirmation={getUserConfirmation}>
-      <Suspense fallback={<LoadingScreen />}>
-        <ErrorBoundary>
-          <Switch>
-            <Route path="/(|tentang|pelajari)" exact component={WebLanding} />
-            <Route path="/admin" component={AdminApp} />
-            <Route path="/" component={SiswaApp} />
-          </Switch>
-        </ErrorBoundary>
-        <ToastContainer />
-      </Suspense>
-    </BrowserRouter>
-    </ApolloHooks>
-    </ApolloProvider>
+    <ThemeProvider theme={THEME === 'sainfikasi' ? sainfikasi : kodekurawal}>
+      <ApolloProvider client={client}>
+        <ApolloHooks client={client}>
+          <BrowserRouter getUserConfirmation={getUserConfirmation}>
+            <Suspense fallback={<LoadingScreen />}>
+              <ErrorBoundary>
+                <Switch>
+                  <Route path="/(|tentang|pelajari)" exact component={WebLanding} />
+                  <Route path="/admin" component={AdminApp} />
+                  <Route path="/" component={SiswaApp} />
+                </Switch>
+              </ErrorBoundary>
+              <ToastContainer />
+            </Suspense>
+          </BrowserRouter>
+        </ApolloHooks>
+      </ApolloProvider>
+    </ThemeProvider>
   );
 }
 
