@@ -6,6 +6,9 @@ import AchievementItem from '../../components/siswa/Achievement/Item';
 import { GET_PLAYER_ACHIEVEMENTS } from '../../queries/player';
 import BadgeItem from '../../components/siswa/Badge/Item';
 import usePlayer from '../../hooks/player';
+const Title = styled.h2`
+  color : ${props => props.theme.titleColor}
+`
 const Achievement = () => {
   const player = usePlayer();
   return (
@@ -23,9 +26,9 @@ const Achievement = () => {
               return (
                 <div className="row">
                   <div className="col-7">
-                    <h2 style={{ marginLeft: '30px', fontSize: '40px' }}>
+                    <Title style={{ marginLeft: '30px', fontSize: '40px' }}>
                       Achievement
-                    </h2>
+                    </Title>
 
                     <div>
                       {players[0].achievements.map(achiev => (
@@ -37,9 +40,9 @@ const Achievement = () => {
                     </div>
                   </div>
                   <div className="col-5">
-                    <h2 style={{ marginLeft: '30px', fontSize: '40px' }}>
+                    <Title style={{ marginLeft: '30px', fontSize: '40px' }}>
                       Badges
-                    </h2>
+                    </Title>
                     <div className={classnames('row')}>
                       <Card className="card">
                         <div className="card-body">
