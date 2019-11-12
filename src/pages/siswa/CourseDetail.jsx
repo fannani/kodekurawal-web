@@ -10,6 +10,11 @@ import { GET_STAGE_BY_COURSE_PLAYER } from '../../queries/stages';
 import usePlayer from '../../hooks/player';
 import Modal from 'react-bootstrap4-modal';
 
+const Container = styled.div`
+  border: ${props => props.theme.cardBorder};
+
+`
+
 const CourseDetail = ({ match, className }) => {
   const [showModal, setShowModal] = useState(false);
   const player = usePlayer();
@@ -38,7 +43,7 @@ const CourseDetail = ({ match, className }) => {
                           {courses[0].name}
                         </h2>
                       </div>
-                      <div
+                      <Container
                         className="card"
                         style={{
                           marginTop: '10px',
@@ -79,7 +84,7 @@ const CourseDetail = ({ match, className }) => {
                             return <div>{render}</div>;
                           }}
                         </Query>
-                      </div>
+                      </Container>
                     </div>
                     <div className="col-4">
                       <Leaderboard data={courses[0].leaderboard} />

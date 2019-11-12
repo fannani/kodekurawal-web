@@ -9,10 +9,15 @@ const Container = styled.div`
   margin: 0 auto;
   height: 100%;
   width: 100%;
-  background: #9cecfb;
-  background: -webkit-linear-gradient(to right, #0052d4, #65c7f7, #9cecfb);
-  background: linear-gradient(to right, #0052d4, #65c7f7, #9cecfb);
+  background: ${props => props.theme.loginBackground}
 `;
+
+const Button = styled.button`
+  background-color: ${props => props.theme.primaryColor}
+`
+
+const CardSignIn = styled.div`
+`
 
 const Login = () => {
   const player = usePlayer();
@@ -24,7 +29,7 @@ const Login = () => {
     <Container className="container">
       <div className="row">
         <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
-          <div className="card card-signin my-5">
+          <CardSignIn className="card card-signin my-5">
             <div className="card-body">
               <h5 className="card-title text-center">Sign In</h5>
               <Formik
@@ -96,13 +101,13 @@ const Login = () => {
                           Remember password
                         </label>
                       </div>
-                      <button
+                      <Button
                         className="btn btn-lg btn-primary btn-block text-uppercase"
                         type="submit"
                         disabled={isSubmitting}
                       >
                         Sign in
-                      </button>
+                      </Button>
                       <hr className="my-4" />
                       <Link
                         to="register"
@@ -129,7 +134,7 @@ const Login = () => {
                 )}
               </Formik>
             </div>
-          </div>
+          </CardSignIn>
         </div>
       </div>
     </Container>

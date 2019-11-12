@@ -9,9 +9,7 @@ const Container = styled.div`
   margin: 0 auto;
   height: 100%;
   width: 100%;
-  background: #9cecfb;
-  background: -webkit-linear-gradient(to right, #0052d4, #65c7f7, #9cecfb);
-  background: linear-gradient(to right, #0052d4, #65c7f7, #9cecfb);
+  background: ${props => props.theme.loginBackground}
 `;
 
 const Register = ({ history }) => (

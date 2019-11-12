@@ -3,11 +3,20 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import classnames from 'classnames';
 import { BASE_URL } from '../../../../config/config';
+import Card from "../../../UI/Card";
+
+const ItemImage = styled.div`
+  height:177px;
+  background: url(${props => props.src});
+  background-size: contain !important;
+  border-radius: 10px !important;
+  background-repeat: no-repeat;
+`
 
 const SiswaCourseListItem = ({ className, item }) => (
   <Link className={classnames(className, 'm-2')} to={`/course/${item._id}`}>
-    <div className="card">
-      <img
+    <Card className="card">
+      <ItemImage
         className="card-img-top"
         src={`https://firebasestorage.googleapis.com/v0/b/kodekurawal-ab777.appspot.com/o/${
           item.imageid
@@ -15,9 +24,9 @@ const SiswaCourseListItem = ({ className, item }) => (
       />
       <div className="card-body">
         <h5 className="card-title">{item.name}</h5>
-        <p className="card-text">{item.desc}</p>
+
       </div>
-    </div>
+    </Card>
   </Link>
 );
 

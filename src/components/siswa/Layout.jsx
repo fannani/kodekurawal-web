@@ -4,6 +4,13 @@ import VideoModal from './VideoModal';
 import Header from './Header';
 import { RouteSiswa } from '../../config/route';
 import usePlayer from '../../hooks/player';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  background-color: ${props => props.theme.backgroundColor};
+    overflow: auto;
+
+`
 
 const Layout = () => {
   const [showModal, setShowModal] = useState(false);
@@ -28,7 +35,7 @@ const Layout = () => {
   };
 
   return (
-    <div className="app-container">
+    <Container className="app-container">
       <Header
         play={player.gameplay.play}
         life={player.gameplay.life}
@@ -61,7 +68,7 @@ const Layout = () => {
           player.addEnergy(300);
         }}
       />
-    </div>
+    </Container>
   );
 };
 

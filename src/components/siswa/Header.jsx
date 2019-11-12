@@ -20,6 +20,9 @@ const Navigasi = styled.div`
   width: 100%;
   left: 0;
 `;
+const NavLink = styled(Link)`
+  color: ${props => props.theme.navColor};
+`
 
 const AddButton = styled.button`
   background: none;
@@ -27,6 +30,10 @@ const AddButton = styled.button`
   padding: 0px;
   padding-left: 5px;
 `;
+
+const NavBar = styled.nav`
+  background-color: ${props => props.theme.headerBackground}
+`
 
 const Header = ({
   play,
@@ -45,7 +52,7 @@ const Header = ({
     ''
   );
   return (
-    <nav
+    <NavBar
       className="navbar navbar-expand-md navbar-dark bg-dark"
       style={{ height: '50px' }}
     >
@@ -68,19 +75,19 @@ const Header = ({
                   }}
                 >
                   <li className="nav-item">
-                    <Link className="nav-link" to="/dashboard">
+                    <NavLink className="nav-link" to="/dashboard">
                       Dashboard
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/course">
+                    <NavLink className="nav-link" to="/course">
                       Course
-                    </Link>
+                    </NavLink>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/achievement">
+                    <NavLink className="nav-link" to="/achievement">
                       Achievements
-                    </Link>
+                    </NavLink>
                   </li>
                   {/*<li className="nav-item">*/}
                   {/*  <Link className="nav-link" to="/friends">*/}
@@ -137,7 +144,7 @@ const Header = ({
           ''
         )}
       </div>
-    </nav>
+    </NavBar>
   );
 };
 

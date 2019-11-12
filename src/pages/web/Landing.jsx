@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, {withTheme} from 'styled-components';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 import featuresBackground from '../../assets/images/features_background.png';
 import codingIcon from '../../assets/images/coding.png';
 import gamificationIcon from '../../assets/images/gamification.png';
 import socialIcon from '../../assets/images/social.png';
-import illustration from '../../assets/images/Illustration.svg';
 import newsletterBackground from '../../assets/images/newsletter_background.png';
 import instagram from '../../assets/images/instagram.png';
 import twitter from '../../assets/images/twitter.png';
@@ -15,7 +14,15 @@ import facebook from '../../assets/images/facebook.png';
 import Logo from '../../components/UI/Logo';
 import {TITLE} from "../../config/config";
 
-const WebLanding = ({ className }) => (
+const NavLink = styled(Link)`
+  color: ${props => props.theme.primaryColor}
+  :hover {
+      color: ${props => props.theme.primaryColor}
+
+  }
+`
+
+const WebLanding = ({ className,theme }) => (
   <div className={classnames('container-fluid', className)}>
     <nav className="navbar navbar-expand-lg">
       <a className="navbar-brand" href="#">
@@ -24,24 +31,21 @@ const WebLanding = ({ className }) => (
       <div className="collapse navbar-collapse">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item daftar">
-            <Link className={classnames(className, 'nav-link')} to="/register">
+            <NavLink className={classnames(className, 'nav-link')} to="/register">
               Daftar
-            </Link>
+            </NavLink>
           </li>
           <li className="nav-item ">
-            <Link
-              className={classnames(className, 'btn btn-primary', 'btn-circle')}
-              to="/login"
-            >
+            <NavLink className={classnames(className, 'btn btn-primary', 'btn-circle')} to="/login">
               Masuk
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>
     </nav>
     <div id="main">
-      <img height={280} src={illustration} alt="illustration" />
-      <h2>Cara baru untuk belajar pemrograman</h2>
+      <img height={280} src={theme.landingIllustration} alt="illustration" />
+      <h2>{theme.tagLine}</h2>
       <p>Selesaikan semua Tantangan dan jadilah yang Teratas</p>
       <p>Suka bermain Game, Pasti jago disini</p>
       <Link className="btn btn-primary btn-circle btn-start" to="/register">
@@ -56,34 +60,25 @@ const WebLanding = ({ className }) => (
         <div className="row justify-content-md-center">
           <div className="feature col-3">
             <img src={gamificationIcon} alt="" />
-            <h3>Gamification</h3>
-            <p>
-              Belajar pemrograman dengan menggunakan mekanisme bermain game,
-              sehingga proses belajar tidak lagi membosankan
-            </p>
+            <h3>{theme.feature1}</h3>
+            <p>{ theme.featureDescription1 }</p>
           </div>
           <div className="feature col-3">
             <img src={socialIcon} alt="" />
-            <h3>Social</h3>
-            <p>
-              Belajar pemrograman dengan menggunakan mekanisme bermain game,
-              sehingga proses belajar tidak lagi membosankan
-            </p>
+            <h3>{theme.feature2}</h3>
+            <p> { theme.featureDescription1 }</p>
           </div>
           <div className="feature col-3">
             <img src={codingIcon} alt="" />
-            <h3>Real Coding</h3>
-            <p>
-              Belajar pemrograman dengan menggunakan mekanisme bermain game,
-              sehingga proses belajar tidak lagi membosankan
-            </p>
+            <h3>{theme.feature3}</h3>
+            <p>{ theme.featureDescription3 }</p>
           </div>
         </div>
       </div>
     </div>
     <div id="newsletter" className="row">
       <div className="col-4 offset-1">
-        <h3>Berlangganan Informasi KodeMaster Melalui Email</h3>
+        <h3>Berlangganan Informasi {TITLE} Melalui Email</h3>
         <p>
           Jangan sampai kamu melewatkan informasi penting tentang {TITLE}.
           Kamu bisa berlangganan Newsletter {TITLE} dengan cara mengisi
@@ -164,7 +159,7 @@ WebLanding.propTypes = {
   className: PropTypes.any.isRequired,
 };
 
-const styledLayout = styled(WebLanding)`
+const styledLayout = styled(withTheme(WebLanding))`
   background-color: white;
   font-family: open sans;
   #features {
@@ -224,8 +219,9 @@ const styledLayout = styled(WebLanding)`
     font-weight: bold;
   }
   .btn-primary {
-    background-color: #4891e3 !important;
-    border-color: #4891e3 !important;
+    background-color: ${props => props.theme.primaryColor} !important;
+    border-color: ${props => props.theme.primaryColor} !important;
+    color:white;
   }
   .feature {
     padding: 10px;
