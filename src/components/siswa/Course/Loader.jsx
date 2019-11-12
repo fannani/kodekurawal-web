@@ -1,7 +1,9 @@
 import ContentLoader from 'react-content-loader';
 import React from 'react';
+import styled, {withTheme} from 'styled-components';
 
-const Loader = () => {
+
+const Loader = ({theme}) => {
   return (
     <main role="main" className="container-fluid">
       <div className="row flex-xl-nowrap">
@@ -9,9 +11,7 @@ const Loader = () => {
           id="guide"
           className="col-sm-4"
           style={{
-            overflowY: 'scroll',
             height: 'calc(100vh - 100px)',
-            overflowX: 'hidden',
             backgroundColor: 'white',
           }}
         >
@@ -65,7 +65,7 @@ const Loader = () => {
       </div>
       <div
         className="row flex-xl-nowrap"
-        style={{ height: '50px', backgroundColor: '#343A40' }}
+        style={{ height: '50px', backgroundColor: theme.headerBackground }}
       >
         <div className="col-4" />
         <div className="col-4 level-nav" />
@@ -74,4 +74,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+export default withTheme(Loader);
