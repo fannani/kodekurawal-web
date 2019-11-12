@@ -64,7 +64,7 @@ const Card = styled.div`
   width: 100%;
   margin-top: 10px;
   border-radius: 10px !important;
-  border: 0 !important;
+  border: ${props => props.theme.cardBorder};
   margin-left: 20px;
   height: 400px;
   margin-right: 13px;

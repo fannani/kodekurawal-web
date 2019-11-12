@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const Sidebar = styled.div`
   width: 400px;
-  background-color: #343a40;
+  background-color: ${props => props.theme.sidebarColor};
   height: 100%;
   color: white;
 `;

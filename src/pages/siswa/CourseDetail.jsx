@@ -14,7 +14,9 @@ const Container = styled.div`
   border: ${props => props.theme.cardBorder};
 
 `
-
+const Title = styled.h2`
+  color : ${props => props.theme.titleColor}
+`
 const CourseDetail = ({ match, className }) => {
   const [showModal, setShowModal] = useState(false);
   const player = usePlayer();
@@ -39,9 +41,9 @@ const CourseDetail = ({ match, className }) => {
                   <div className="row">
                     <div className="col-8">
                       <div className="row">
-                        <h2 style={{ marginLeft: '30px', fontSize: '40px' }}>
+                        <Title style={{ marginLeft: '30px', fontSize: '40px' }}>
                           {courses[0].name}
-                        </h2>
+                        </Title>
                       </div>
                       <Container
                         className="card"

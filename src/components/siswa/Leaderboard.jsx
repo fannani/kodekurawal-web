@@ -7,11 +7,14 @@ const Container = styled.div`
 
 `
 
+const Title = styled.h2`
+  color : ${props => props.theme.titleColor}
+`
 const Leaderboard = ({ data, className }) => (
   <div className={classnames('row', className)}>
-    <h2 style={{ marginLeft: '30px', fontSize: '20px', marginTop: '24px' }}>
+    <Title style={{ marginLeft: '30px', fontSize: '20px', marginTop: '24px' }}>
       Leaderboard
-    </h2>
+    </Title>
     <Container className="card" style={{ width: '100%', marginTop: '10px' }}>
       <div className="card-body">
         <ul className="list-group">

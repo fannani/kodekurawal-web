@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import ContentLoader from 'react-content-loader';
 import SiswaCourseListItem from '../../components/siswa/Course/List/Item';
 import { GET_COURSES } from '../../queries/courses';
-
+import styled from 'styled-components';
 const Loader = () => {
   const content = (
     <div
@@ -33,12 +33,15 @@ const Loader = () => {
     </div>
   );
 };
+const Title = styled.h2`
+  color : ${props => props.theme.titleColor}
+`
 const CourseList = () => (
   <div className="container-fluid">
     <div className="row justify-content-center">
       <main className="col-12 main-container" style={{ maxWidth: '1100px' }}>
         <div>
-          <h2 style={{ marginLeft: '30px', fontSize: '40px' }}>All Course</h2>
+          <Title style={{ marginLeft: '30px', fontSize: '40px' }}>All Course</Title>
           <Query query={GET_COURSES}>
             {({ loading, error, data }) => {
               if (loading) return <Loader />;

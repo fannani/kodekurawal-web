@@ -46,7 +46,7 @@ const StyledAchievementItem = styled(SiswaAchievementItem)`
     width: 100%;
     margin-top: 10px;
     border-radius: 10px !important;
-    border: 0;
+    border: ${props => props.theme.cardBorder};
     margin-left: 20px;
   }
   .card-title {

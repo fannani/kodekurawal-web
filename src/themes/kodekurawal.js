@@ -4,6 +4,8 @@ import kodekurawal from '../assets/images/Illustration.svg';
 export default {
   primaryColor : '#4891e3',
   backgroundColor : '#e9e9e9',
+  sidebarColor: '#343a40',
+  titleColor: 'black',
   cardBorder: '0px !important',
   headerBackground: '#343A40 !important',
   navColor : '',

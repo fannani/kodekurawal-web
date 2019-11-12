@@ -12,6 +12,10 @@ const Container = styled.div`
   background: ${props => props.theme.loginBackground}
 `;
 
+const Button = styled.button`
+  background-color: ${props => props.theme.primaryColor}
+`
+
 const Register = ({ history }) => (
   <Container className="container">
     <div className="row">
@@ -98,13 +102,13 @@ const Register = ({ history }) => (
                         <label htmlFor="inputPassword">Password</label>
                       </div>
 
-                      <button
+                      <Button
                         className="btn btn-lg btn-primary btn-block text-uppercase"
                         type="submit"
                         disabled={isSubmitting}
                       >
                         Sign Up
-                      </button>
+                      </Button>
                     </Form>
                   </div>
                 </div>
