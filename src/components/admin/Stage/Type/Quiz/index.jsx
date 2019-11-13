@@ -106,8 +106,7 @@ export default ({ stage, history }) => {
               type="number"
               name="time"
               className="form-control"
-              placeholder="Time"
-
+              placeholder="Max time for get a star (seconds)"
             />
           </div>
           <FieldArray

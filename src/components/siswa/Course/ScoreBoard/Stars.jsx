@@ -10,7 +10,7 @@ const Desc = styled.p`
   font-size: 14px;
 `;
 
-const SiswaCourseScoreBoardStars = ({ className, value }) => (
+const SiswaCourseScoreBoardStars = ({ className, value , maxTime}) => (
   <div className={classnames(className, 'row justify-content-center')}>
     <div className="col-3">
       <Star width="50px" src={value[0] ? star : starOff} />
@@ -18,7 +18,7 @@ const SiswaCourseScoreBoardStars = ({ className, value }) => (
     </div>
     <div className="col-3">
       <Star width="50px" src={value[1] ? star : starOff} />
-      <Desc>Selesaikan dalam 3 menit</Desc>
+      <Desc>Selesaikan kurang dari {Math.round(maxTime / 60)} menit</Desc>
     </div>
     <div className="col-3">
       <Star width="50px" src={value[2] ? star : starOff} />
