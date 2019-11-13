@@ -29,7 +29,7 @@ const Layout = () => {
   };
 
   const onClickVideo = () => {
-    player.addEnergy(300); //for test
+   // player.addEnergy(300); //for test
     setShowModal(false);
     setShowVideo(true);
   };
@@ -65,7 +65,7 @@ const Layout = () => {
         onClose={() => setShowVideo(false)}
         onEnd={() => {
           setShowVideo(false);
-          player.addEnergy(300);
+          player.addEnergy(1000);
         }}
       />
     </Container>

@@ -97,7 +97,7 @@ const UpdateForm = ({ stage }) => {
                       className="form-control"
                       type="number"
                       name="time"
-                      placeholder="Waktu"
+                      placeholder="Max time for get a star (seconds)"
                     />
                   </div>
                   <div className="form-group">

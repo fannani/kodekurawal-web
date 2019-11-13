@@ -12,7 +12,6 @@ import Modal from 'react-bootstrap4-modal';
 
 const Container = styled.div`
   border: ${props => props.theme.cardBorder};
-
 `
 const Title = styled.h2`
   color : ${props => props.theme.titleColor}

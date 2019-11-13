@@ -4,7 +4,6 @@ import classnames from 'classnames';
 
 const Container = styled.div`
   border: ${props => props.theme.cardBorder};
-
 `
 
 const Title = styled.h2`
