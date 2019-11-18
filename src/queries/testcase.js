@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 export const GET_TESTCASES = gql`
   {
-    testcase {
+    testcases {
       _id
       caption
       script

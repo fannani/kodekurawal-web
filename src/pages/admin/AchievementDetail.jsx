@@ -48,6 +48,7 @@ const AchievementDetail = ({
                         return (
                           <p>Sorry! There was an error loading the items</p>
                         );
+                      console.log(achievements);
                       return (
                         <table className="table">
                           <thead>
