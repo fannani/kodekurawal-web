@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import lock from '../../../assets/images/lock.png';
 import star from '../../../assets/images/star.png';
 import starOff from '../../../assets/images/star-off.png';
+import {BASE_URL} from "../../../config/config";
 
 const SiswaStageItem = ({
   className,
@@ -38,9 +39,9 @@ const SiswaStageItem = ({
         <div
           className="circle"
           style={{
-            backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/kodekurawal-ab777.appspot.com/o/${
+            backgroundImage: stage.imageid ? `url("https://firebasestorage.googleapis.com/v0/b/kodekurawal-ab777.appspot.com/o/${
               stage.imageid
-            }?alt=media")`,
+            }?alt=media")` : `url("${BASE_URL}assets/images/${stage.type === "MATERIAL" ? "open-book.png" : stage.type === "QUIZ" ? "question.png" : ""}")`,
           }}
         >
           {!unlock ? (
@@ -117,7 +118,8 @@ const StyledStageItem = styled(SiswaStageItem)`
     margin-right: auto;
     background-color: white;
     background-position: center;
-    background-size: cover;
+    background-size: 65px;
+    background-repeat: no-repeat
     width: 100px;
     height: 100px;
     border: 6px solid #dddddd;

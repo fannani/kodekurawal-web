@@ -9,6 +9,7 @@ export const GET_STAGE_BY_COURSE_PLAYER = gql`
       teory
       win
       score
+      type
       stars
       imageid
       course {
