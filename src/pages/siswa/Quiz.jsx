@@ -40,13 +40,13 @@ const ChoiceText = styled.p`
 `
 const QuestionText = styled.p`
   font-weight : 500;
-  font-size:19px;
+  font-size:14px;
   margin-bottom:20px;
 `
 
 const BottomBar = styled.div`
   position:absolute;
-  width: 100% ;
+  width: 100%;
   bottom:0;
   border-bottom-left-radius: 10px !important;
   border-bottom-right-radius: 10px !important;
@@ -78,6 +78,10 @@ const Choice = ({value, text, state, disable, onClick, }) => {
 
 const htmlToReactParser = new HtmlToReact.Parser();
 
+const QuizContainer = styled.div`
+  height:calc(100vh - 290px);
+  overflow-y: scroll;
+`
 
 const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectChoice}) => {
   const [choiceActive,setChoiceActive] = useState('');
@@ -139,7 +143,7 @@ const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectCh
     <Card className={classnames(className,"card col-10 offset-1")}>
       <ProgressBar progress={progress}/>
         <div >
-          <div className="col-8 offset-2" style={{marginTop: "10px"}}>
+          <QuizContainer className="col-12 " style={{marginTop: "5px"}}>
             <QuestionText>{htmlToReactParser.parse(quiz.questions[indexQuestion].content)}</QuestionText>
             { quiz.questions[indexQuestion].choice.map(choice => (
               <Choice
@@ -160,7 +164,7 @@ const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectCh
                 onClick={onChoiceClick}/>
             ))}
 
-          </div>
+          </QuizContainer>
           <BottomBar submitted={isSubmitted} result={result}>
             <Message submitted={isSubmitted} result={result} >
               {isSubmitted ? result ? 'Selamat jawaban anda benar' : 'Jawaban anda salah' : '' }
