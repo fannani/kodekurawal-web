@@ -59,8 +59,8 @@ export const ADD_COURSE = gql`
 `;
 
 export const UPDATE_COURSE = gql`
-  mutation updateCourse($id: ID!, $name: String, $desc: String) {
-    updateCourse(id: $id, name: $name, desc: $desc) {
+  mutation updateCourse($id: ID!, $name: String, $desc: String, $file: Upload) {
+    updateCourse(id: $id, name: $name, desc: $desc, file: $file) {
       _id
       name
       desc
