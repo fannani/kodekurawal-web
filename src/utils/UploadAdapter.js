@@ -61,7 +61,7 @@ class UploadAdapter {
     });
 
     return {
-      default: `${process.env.REACT_APP_STATIC_URL}${result.data.uploadFile.path}`,
+      default: `https://firebasestorage.googleapis.com/v0/b/kodekurawal-ab777.appspot.com/o/${result.data.uploadFile.path}?alt=media`,
     };
   }
 
