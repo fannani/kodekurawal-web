@@ -20,14 +20,16 @@ const AdminCourseDetail = ({ courses }) => {
               initialValues={{
                 name: courses.name,
                 desc: courses.desc,
+                image: undefined,
               }}
-              onSubmit={({ name, desc }, { setSubmitting }) => {
+              onSubmit={({ name, desc ,image}, { setSubmitting }) => {
                 setSubmitting(true);
                 updateCourse({
                   variables: {
                     id: courses._id,
                     name,
                     desc,
+                    file: image,
                   },
                 }).then(() => {
                   setSubmitting(false);
@@ -35,7 +37,7 @@ const AdminCourseDetail = ({ courses }) => {
                 });
               }}
             >
-              {() => (
+              {({ setFieldValue }) => (
                 <Form>
                   <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -54,6 +56,21 @@ const AdminCourseDetail = ({ courses }) => {
                       component="textarea"
                       className="form-control"
                       placeholder="Description"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="file">Course Image</label>
+                    <input
+                      id="file"
+                      name="file"
+                      type="file"
+                      onChange={event => {
+                        setFieldValue(
+                          'image',
+                          event.currentTarget.files[0],
+                        );
+                      }}
+                      className="form-control-file"
                     />
                   </div>
 
