@@ -351,7 +351,7 @@ const Course = ({
                                   setIsPlay(false);
                                   setFromMaterial(true);
 
-                                  player.addExp(/*stages[0].exp_reward*/500);
+                                  player.addExp(/*stages[0].exp_reward*/100);
                                   const addScoreData = {
                                     variables: {
                                       player: player.user.userdetailid,
