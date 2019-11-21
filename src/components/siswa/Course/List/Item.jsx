@@ -11,6 +11,7 @@ const ItemImage = styled.div`
   background-size: contain !important;
   border-radius: 10px !important;
   background-repeat: no-repeat;
+  background-position: center;
 `
 
 const SiswaCourseListItem = ({ className, item }) => (
