@@ -384,25 +384,28 @@ const Course = ({
                 }
                 history={history}
               />
+              { stages[0].type === 'PROGRAMMING' &&  <Tour
+                steps={tour}
+                isOpen={tourOpen}
+                lastStepNextButton={
+                  <button type="button" className="btn btn-primary">
+                    Done! Happy Coding!
+                  </button>
+                }
+                onRequestClose={() => {
+                  setTourOpen(false);
+                  if (player.user.userdetail.tutorial) {
+                    player.setTutorial(false, 0);
+                  }
+                }}
+              /> }
+
             </>
           );
         }}
       </Query>
-      <Tour
-        steps={tour}
-        isOpen={tourOpen}
-        lastStepNextButton={
-          <button type="button" className="btn btn-primary">
-            Done! Happy Coding!
-          </button>
-        }
-        onRequestClose={() => {
-          setTourOpen(false);
-          if (player.user.userdetail.tutorial) {
-            player.setTutorial(false, 0);
-          }
-        }}
-      />
+
+
     </Container>
   );
 };
