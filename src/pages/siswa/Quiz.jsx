@@ -83,7 +83,7 @@ const QuizContainer = styled.div`
   overflow-y: scroll;
 `
 
-const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectChoice}) => {
+const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectChoice, life}) => {
   const [choiceActive,setChoiceActive] = useState('');
   const [result,setResult] = useState('');
   const [choiceDisable, setChoiceDisable] = useState(0);
@@ -95,7 +95,7 @@ const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectCh
   useEffect(() => {
     if(isSubmitted){
       if(!result){
-        onWrongChoice();
+        onWrongChoice(score);
       } else {
         onCorrectChoice(score);
       }
