@@ -121,7 +121,6 @@ const Course = ({
     interval = setInterval(player.incrementTimer, 1000);
     player.setPlayerStatus(0, 3);
     player.setPlayMode(true);
-
     //FOR QUIZ
     setFromMaterial(false);
     setIndexQuestion(0);
