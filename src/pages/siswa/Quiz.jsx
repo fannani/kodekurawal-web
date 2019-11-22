@@ -83,14 +83,19 @@ const QuizContainer = styled.div`
   overflow-y: scroll;
 `
 
-const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectChoice, life}) => {
+const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectChoice, life, index, onNextQuestion}) => {
   const [choiceActive,setChoiceActive] = useState('');
   const [result,setResult] = useState('');
   const [choiceDisable, setChoiceDisable] = useState(0);
-  const [indexQuestion, setIndexQuestion] = useState(0);
   const [progress, setProgress] = useState(0);
   const [score, setScore] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    if(index === 0){
+      setProgress(0);
+    }
+  }, [index])
 
   useEffect(() => {
     if(isSubmitted){
@@ -116,14 +121,14 @@ const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectCh
     if(isSubmitted){
       setIsSubmitted(false);
       resetValue();
-      if ((indexQuestion+1) < quiz.questions.length) {
-        setIndexQuestion(indexQuestion+1);
+      if ((index+1) < quiz.questions.length) {
+        onNextQuestion();
       } else {
         gameOver();
       }
     } else {
       setProgress(progress+addScore)
-      if (choiceActive === quiz.questions[indexQuestion].answer) {
+      if (choiceActive === quiz.questions[index].answer) {
         setResult(true);
         setScore(score + addScore);
       } else {
@@ -144,16 +149,16 @@ const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectCh
       <ProgressBar progress={progress}/>
         <div >
           <QuizContainer className="col-12 " style={{marginTop: "5px"}}>
-            <QuestionText>{htmlToReactParser.parse(quiz.questions[indexQuestion].content)}</QuestionText>
-            { quiz.questions[indexQuestion].choice.map(choice => (
+            <QuestionText>{htmlToReactParser.parse(quiz.questions[index].content)}</QuestionText>
+            { quiz.questions[index].choice.map(choice => (
               <Choice
                 value={choice}
                 text={choice}
                 state={(() => {
-                  if(choice === quiz.questions[indexQuestion].answer && isSubmitted ){
+                  if(choice === quiz.questions[index].answer && isSubmitted ){
                      return "IS_ANSWER" 
                   }
-                  if(choiceActive === choice && choice !== quiz.questions[indexQuestion].answer && isSubmitted  ){
+                  if(choiceActive === choice && choice !== quiz.questions[index].answer && isSubmitted  ){
                     return "WRONG_ANSWER"
                   }
                   if(choiceActive === choice){
@@ -173,7 +178,7 @@ const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectCh
               submitted={isSubmitted} result={result}
               className="btn btn-primary float-right"
               style={{marginTop:"20px", textAlign:"center"}} onClick={submit}>
-              {isSubmitted ? indexQuestion < quiz.questions.length - 1 ? 'Lanjut' : 'Selesai' : 'Periksa'}
+              {isSubmitted ? index < quiz.questions.length - 1 ? 'Lanjut' : 'Selesai' : 'Periksa'}
             </ButtonSubmit>
           </BottomBar>
         </div>
