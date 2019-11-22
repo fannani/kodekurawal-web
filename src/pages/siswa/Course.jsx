@@ -89,6 +89,7 @@ const Course = ({
   const [showModal, setShowModal] = useState(false);
   const [stars, setStars] = useState([]);
   const [showOutOfEnergy, setShowOutOfEnergy] = useState(false);
+  const [indexQuestion, setIndexQuestion] = useState(0);
   const [stage, setStage] = useState({});
   const [tourOpen, setTourOpen] = useState(
     player.user.userdetail.tutorial[0] === null ||
@@ -120,6 +121,10 @@ const Course = ({
     interval = setInterval(player.incrementTimer, 1000);
     player.setPlayerStatus(0, 3);
     player.setPlayMode(true);
+    //FOR QUIZ
+    setFromMaterial(false);
+    setIndexQuestion(0);
+
   };
   useEffect(
     () => {
@@ -250,7 +255,9 @@ const Course = ({
                         <>
                           <div className="row flex-xl-nowrap">
                             { stages[0].type === 'QUIZ' ?
-                              <Quiz stage={stages[0]} life={player.gameplay.life} onFinish={(score) => {
+                              <Quiz index={indexQuestion} stage={stages[0]} life={player.gameplay.life} onNextQuestion={() => {
+                                setIndexQuestion(indexQuestion+1);
+                              }} onFinish={(score) => {
                                 const starCount = calculateStars(
                                   player.gameplay.currentTimer,
                                   stages[0].time,
