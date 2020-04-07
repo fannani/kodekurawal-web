@@ -68,7 +68,7 @@
     "styled-components": "^4.3.2"
   },
   "scripts": {
-    "dev": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts start",
+    "dev": "cp env-config.js ./public/ && react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "chmod +x ./env.sh && ./env.sh && cp env-config.js ./public/ && react-scripts test",

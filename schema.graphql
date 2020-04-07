@@ -3,7 +3,6 @@ directive @cacheControl(
   scope: CacheControlScope
 ) on FIELD_DEFINITION | OBJECT | INTERFACE
 type Achievement {
-  id: ID!
   text: String!
   _id: ID!
   title: String!
@@ -12,6 +11,7 @@ type Achievement {
   star: Int
   target_point: Int
   point: Int
+  detail: [AchievementDetail]
   updated_at: String!
 }
 
@@ -114,6 +114,12 @@ type Mission {
 }
 
 type Mutation {
+  registerUser(
+    name: String!
+    email: String!
+    password: String!
+    role: String!
+  ): User
   addTestCase(caption: String!, script: String!): TestCase
   deleteTestcase(id: ID!): TestCase
   addPlayerAchievement(
@@ -196,7 +202,13 @@ type Mutation {
   deleteStage(id: ID!): Stage
   reorderStage(courseid: ID, source: ID, destination: Int): Course
   addCourse(name: String!, desc: String!, script: String, file: Upload): Course
-  updateCourse(id: ID!, name: String, desc: String, script: String): Course
+  updateCourse(
+    id: ID!
+    name: String
+    desc: String
+    script: String
+    file: Upload
+  ): Course
   deleteCourse(id: ID!): Course
   uploadImage(courseid: ID, file: Upload): String
   uploadFile(input: FileInput!): File
@@ -249,7 +261,7 @@ type Query {
   players(_id: ID, energy: Int): [Player]
   avatars: [Avatar]
   badges: [Badge]
-  achievements: [Achievement]
+  achievements(_id: ID): [Achievement]
   testCaseMissions(_id: ID, mission: ID): [TestCaseMission]
   missions: [Mission]
   scores: [Score]
@@ -341,7 +353,8 @@ type Stage {
   imageid: String
   script: String
   missions: [Mission]
-  quiz: [Quiz]
+  quiz: Quiz
+  material: Material
   course: Course
   updated_at: String!
 }
