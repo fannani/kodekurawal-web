@@ -35,6 +35,29 @@ import { toast } from 'react-toastify';
 const usePlayer = () => {
   const [state, dispatch] = useContext(AppContext);
 
+  const TOKEN_KEY = "tokens";
+  const saveTokens = (tokens) => {
+    localStorage.setItem(TOKEN_KEY, JSON.stringify(tokens));
+  }
+
+  const getTokens = () => {
+    return JSON.parse(localStorage.getItem(TOKEN_KEY));
+  }
+
+  const deleteTokens = () => {
+    localStorage.removeItem(TOKEN_KEY);
+  }
+
+
+  const setAuth = (user) => {
+    const success = (user) => ({
+      type: LOGIN_SUCCESS,
+      user,
+      isLogin : true,
+    });
+    dispatch(success(user));
+  }
+
   const login = (email, password) => {
     const request = () => ({ type: LOGIN_REQUEST });
     const success = (user, isLogin) => ({
@@ -63,7 +86,7 @@ const usePlayer = () => {
   };
 
   const setTutorial = (tutorial, index) => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     const request = () => ({ type: SET_TUTORIAL_REQUEST });
     const success = user => ({ type: SET_TUTORIAL_SUCCESS, user });
     const failure = error => ({ type: SET_TUTORIAL_FAILURE, error });
@@ -166,7 +189,11 @@ const usePlayer = () => {
     giveAchievement,
     changeAvatar,
     setTutorial,
-    isLogin: state.isLogin && state.user.role === 'siswa',
+    saveTokens,
+    getTokens,
+    deleteTokens,
+    setAuth,
+    isLogin: state.isLogin && state.user.role === 'USER',
     user: state.user,
     incrementTimer: () => {
       dispatch(updateTimer());

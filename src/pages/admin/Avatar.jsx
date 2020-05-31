@@ -5,7 +5,7 @@ import Card from '../../components/UI/Card';
 import { Field, Form, Formik } from 'formik';
 import Modal from 'react-bootstrap4-modal';
 import { ADD_AVATAR, GET_AVATARS } from '../../queries/avatar';
-import { Mutation, Query } from 'react-apollo';
+import { Mutation, Query } from 'react-apollo'; 
 import { GET_COURSES } from '../../queries/courses';
 import { Link } from 'react-router-dom';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { Mutation } from 'react-apollo';
 import styled from 'styled-components';
-import { REGISTER } from '../../queries/users';
+import { SIGNUP } from '../../queries/users';
 
 const Container = styled.div`
   max-width: 100% !important;
@@ -20,8 +20,8 @@ const Register = ({ history }) => (
   <Container className="container">
     <div className="row">
       <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <Mutation mutation={REGISTER}>
-          {register => (
+        <Mutation mutation={SIGNUP}>
+          {signUp => (
             <Formik
               initialValues={{
                 email: '',
@@ -32,7 +32,7 @@ const Register = ({ history }) => (
                 const { name, email, password } = values;
                 setStatus(undefined);
                 if (name && email && password) {
-                  register({
+                  signUp({
                     variables: {
                       name,
                       email,

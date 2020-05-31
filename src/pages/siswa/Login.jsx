@@ -3,6 +3,8 @@ import { Formik, Form, Field } from 'formik';
 import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import usePlayer from '../../hooks/player';
+import { SIGNIN } from '../../queries/users';
+import Mutation from "react-apollo/Mutation";
 
 const Container = styled.div`
   max-width: 100% !important;
@@ -32,6 +34,8 @@ const Login = () => {
           <CardSignIn className="card card-signin my-5">
             <div className="card-body">
               <h5 className="card-title text-center">Sign In</h5>
+              <Mutation mutation={SIGNIN}>
+                {signIn => (
               <Formik
                 initialValues={{
                   email: '',
@@ -41,15 +45,31 @@ const Login = () => {
                   setStatus(undefined);
                   const { email, password } = values;
                   if (email && password) {
-                    player.login(email, password).then(
-                      () => {
+                    signIn({
+                      variables : {
+                        email, password
+                      }
+                    }).then(
+                      ({data}) => {
+                        console.log(data.signIn.user);
                         setSubmitting(false);
+                        player.saveTokens(data.signIn.tokens);
+                        player.setAuth(data.signIn.user);
                       },
                       () => {
                         setStatus({ error: 'Email atau Password salah' });
                         setSubmitting(false);
-                      },
-                    );
+                      }
+                    )
+                    // player.login(email, password).then(
+                    //   () => {
+                    //     setSubmitting(false);
+                    //   },
+                    //   () => {
+                    //     setStatus({ error: 'Email atau Password salah' });
+                    //     setSubmitting(false);
+                    //   },
+                    // );
                   }
                 }}
               >
@@ -132,7 +152,8 @@ const Login = () => {
                     </Form>
                   </>
                 )}
-              </Formik>
+              </Formik>)}
+              </Mutation>
             </div>
           </CardSignIn>
         </div>

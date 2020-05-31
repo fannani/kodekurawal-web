@@ -13,7 +13,7 @@ import {
 
 export const initialState = {
   isLogin: false,
-  user: { userdetail: { energy: 0 } },
+  user: { player: { energy: 0 } },
   gameplay: {
     currentTimer: 0,
     life: 0,
@@ -26,6 +26,7 @@ export const reducer = (state, action) => {
   const { gameplay } = state;
   switch (action.type) {
     case LOGIN_SUCCESS:
+      console.log(action.user);
       return {
         ...state,
         isLogin: action.isLogin,
@@ -82,7 +83,7 @@ export const reducer = (state, action) => {
         ...state,
         user: {
           ...state.user,
-          userdetail: { ...state.user.userdetail, energy: action.user.energy },
+          player: { ...state.user.player, energy: action.user.energy },
         },
       };
     case UPDATE_STARS:
@@ -90,7 +91,7 @@ export const reducer = (state, action) => {
         ...state,
         user: {
           ...state.user,
-          userdetail: { ...state.user.userdetail, stars: action.stars },
+          player: { ...state.user.player, stars: action.stars },
         },
       };
     case ADD_EXP_SUCCESS:
@@ -98,8 +99,8 @@ export const reducer = (state, action) => {
         ...state,
         user: {
           ...state.user,
-          userdetail: {
-            ...state.user.userdetail,
+          player: {
+            ...state.user.player,
             exp: action.user.exp,
             daily_exp: action.user.daily_exp,
             level: action.user.level,
@@ -112,8 +113,8 @@ export const reducer = (state, action) => {
         ...state,
         user: {
           ...state.user,
-          userdetail: {
-            ...state.user.userdetail,
+          player: {
+            ...state.user.player,
             tutorial: action.user.tutorial,
           },
         },
