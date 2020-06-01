@@ -20,6 +20,7 @@ const Coding = ({interactive, stage, onScriptChange,result,editorId,reset }) => 
       }
       onClick={interactive.onEditorClick}
       show={interactive.editorShow}
+      language={stage.language}
       editorId={editorId}
       initialScript={stage.script}
       onExpandClick={interactive.onEditorExpandClick}
@@ -32,7 +33,7 @@ const Coding = ({interactive, stage, onScriptChange,result,editorId,reset }) => 
      <SiswaCourseOutput
       activeMode={
         stage.course._id ===
-        '5cbee57ee721c733c0a428a7'
+        '5cbee57ee721c733c0a428a7' || stage.language === 'c++'
           ? 'console'
           : 'output'
       }
