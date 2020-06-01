@@ -31,7 +31,7 @@ export const UPDATE_MISSION = gql`
 
 export const GET_TESTCASE_MISSION = gql`
   query getTestCaseMission($mission: ID!) {
-    testcaseMission(mission: $mission) {
+    testCaseMissions(mission: $mission) {
       _id
       testcase {
         caption

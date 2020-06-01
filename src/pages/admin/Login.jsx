@@ -2,7 +2,9 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-import useAdmin from '../../hooks/admin';
+import usePlayer from '../../hooks/player';
+import {SIGNIN_ADMIN} from "../../queries/users";
+import Mutation from "react-apollo/Mutation";
 
 const Container = styled.div`
   max-width: 100% !important;
@@ -15,9 +17,8 @@ const Container = styled.div`
 `;
 
 const Login = () => {
-  const admin = useAdmin();
-
-  if (admin.isLogin) {
+  const player = usePlayer();
+  if (player.isAdmin) {
     return <Redirect push to="/admin" />;
   }
   return (
@@ -27,6 +28,8 @@ const Login = () => {
           <div className="card card-signin my-5">
             <div className="card-body">
               <h5 className="card-title text-center">Sign In</h5>
+              <Mutation mutation={SIGNIN_ADMIN}>
+                {signIn => (
               <Formik
                 initialValues={{
                   email: '',
@@ -36,15 +39,31 @@ const Login = () => {
                   setStatus(undefined);
                   const { email, password } = values;
                   if (email && password) {
-                    admin.login(email, password).then(
-                      () => {
+                    signIn({
+                      variables : {
+                        email, password
+                      }
+                    }).then(
+                      ({data}) => {
+                        console.log("IAJSIDJAISJD");
                         setSubmitting(false);
+                        player.saveTokens(data.signIn.tokens);
+                        player.setAuth(data.signIn.user);
                       },
                       () => {
                         setStatus({ error: 'Email atau Password salah' });
                         setSubmitting(false);
-                      },
-                    );
+                      }
+                    )
+                    // admin.login(email, password).then(
+                    //   () => {
+                    //     setSubmitting(false);
+                    //   },
+                    //   () => {
+                    //     setStatus({ error: 'Email atau Password salah' });
+                    //     setSubmitting(false);
+                    //   },
+                    // );
                   }
                 }}
               >
@@ -107,6 +126,8 @@ const Login = () => {
                   </>
                 )}
               </Formik>
+                )}
+              </Mutation>
             </div>
           </div>
         </div>

@@ -102,7 +102,7 @@ const usePlayer = () => {
   };
 
   const addEnergy = energy => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     const request = () => ({ type: ADD_ENERGY_REQUEST });
     const success = user => ({ type: ADD_ENERGY_SUCCESS, user });
     const failure = error => ({ type: ADD_ENERGY_FAILURE, error });
@@ -118,7 +118,7 @@ const usePlayer = () => {
   };
 
   const addBadge = badge => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     const request = () => ({ type: ADD_BADGE_REQUEST });
     const success = user => ({ type: ADD_BADGE_SUCCESS, user });
     const failure = error => ({ type: ADD_BADGE_FAILURE, error });
@@ -137,7 +137,7 @@ const usePlayer = () => {
   };
 
   const giveAchievement = achievement => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     const request = () => ({ type: GIVE_ACHIEV_REQUEST });
     const success = achiev => ({ type: GIVE_ACHIEV_SUCCESS, achiev });
     const failure = error => ({ type: GIVE_ACHIEV_FAILURE, error });
@@ -156,7 +156,7 @@ const usePlayer = () => {
   };
 
   const addExp = exp => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     const request = () => ({ type: ADD_EXP_REQUEST });
     const success = user => ({ type: ADD_EXP_SUCCESS, user });
     const failure = error => ({ type: ADD_EXP_FAILURE, error });
@@ -172,7 +172,7 @@ const usePlayer = () => {
   };
 
   const changeAvatar = avatar => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     return PlayerService.changeAvatar(userid, avatar._id).then(
       player => player,
       error => error,
@@ -194,6 +194,7 @@ const usePlayer = () => {
     deleteTokens,
     setAuth,
     isLogin: state.isLogin && state.user.role === 'USER',
+    isAdmin: state.isLogin && state.user.role === 'ADMIN',
     user: state.user,
     incrementTimer: () => {
       dispatch(updateTimer());

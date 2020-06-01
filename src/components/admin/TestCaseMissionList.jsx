@@ -18,14 +18,14 @@ const TestCaseMissionList = ({ onCreate, missionid, onDelete }) => (
             query={GET_TESTCASE_MISSION}
             variables={{ mission: missionid }}
           >
-            {({ loading, error, data: { testcaseMission } }) => {
+            {({ loading, error, data: { testCaseMissions } }) => {
               if (loading) return <p>Loading…</p>;
               if (error) {
                 return <p>Sorry! There was an error loading the items</p>;
               }
               return (
                 <ul className="list-group">
-                  {testcaseMission.map(data => (
+                  {testCaseMissions.map(data => (
                     <li
                       key={data._id}
                       className="list-group-item d-flex justify-content-between align-items-center"

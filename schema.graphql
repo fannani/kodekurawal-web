@@ -85,6 +85,7 @@ type Mission {
   _id: ID!
   quest: String!
   score: Int!
+  stage: Stage
   testcase: [TestCaseMission]
   updated_at: String!
 }
@@ -184,7 +185,7 @@ type Query {
   files: [File]
   material(css: Boolean = true, where: MaterialWhere!): Material
   materials: [Material]
-  missions: [Mission]
+  missions(_id: ID): [Mission]
   playerAchievements: [PlayerAchievement]
   playerLevel: [PlayerLevel]
   players(_id: ID, energy: Int): [Player]

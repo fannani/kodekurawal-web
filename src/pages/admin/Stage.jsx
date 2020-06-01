@@ -9,6 +9,7 @@ import UpdateForm from '../../components/admin/Stage/UpdateForm';
 import MissionList from '../../components/admin/Stage/MissionList';
 import MaterialType from "../../components/admin/Stage/Type/Material";
 import QuizType from "../../components/admin/Stage/Type/Quiz";
+import TextEditor from "../../components/UI/TextEditor";
 
 
 const ProgrammingType = ({stage, addMission, missions, language}) => {
@@ -57,6 +58,7 @@ const Stage = ({ match, history }) => {
             if (loading) return <p>Loading…</p>;
             if (error)
               return <p>Sorry! There was an error loading the items</p>;
+
             return (
               <main className="col-12 main-container">
                 <Type
@@ -93,18 +95,24 @@ const Stage = ({ match, history }) => {
                 });
               }}
             >
-              {() => (
+              {({setFieldValue}) => (
                 <Form>
                   <div className="modal-body">
                     <div className="card-body">
                       <div className="form-group">
                         <label htmlFor="query">Quest</label>
-                        <Field
-                          type="text"
-                          placeholder="quest"
-                          name="quest"
-                          className="form-control"
+                        <TextEditor
+                          value={null}
+                          onChangeData={state => {
+                            setFieldValue('quest', state);
+                          }}
                         />
+                        {/*<Field*/}
+                        {/*  type="text"*/}
+                        {/*  placeholder="quest"*/}
+                        {/*  name="quest"*/}
+                        {/*  className="form-control"*/}
+                        {/*/>*/}
                       </div>
                       <div className="form-group">
                         <label htmlFor="score">Score</label>

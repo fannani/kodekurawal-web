@@ -77,7 +77,7 @@ const CourseDetail = ({ match, className }) => {
                                   stage={stages[i]}
                                   unlock={unlock}
                                   onOutOfEnergy={onOutOfEnergy}
-                                  energy={player.user.userdetail.energy}
+                                  energy={player.user.player.energy}
                                 />,
                               );
                               unlock = stages[i].win;
