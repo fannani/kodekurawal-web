@@ -27,7 +27,7 @@ const ChooseTestCaseModal = ({ show, modalClosed, onChoose }) => (
                   </tr>
                 </thead>
                 <tbody>
-                  {data.testcase.map(testcase => (
+                  {data.testcases.map(testcase => (
                     <tr>
                       <td>{testcase.caption}</td>
                       <td>

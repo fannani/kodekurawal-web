@@ -48,8 +48,8 @@ const Layout = () => {
         onAddEnergy={onAddEnergy}
         energy={
           player.user &&
-          Object.prototype.hasOwnProperty.call(player.user, 'userdetail')
-            ? player.user.userdetail.energy
+          Object.prototype.hasOwnProperty.call(player.user, 'player')
+            ? player.user.player.energy
             : 0
         }
       />

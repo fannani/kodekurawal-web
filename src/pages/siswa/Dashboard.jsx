@@ -77,10 +77,10 @@ const Lock = () => (
 const Dashboard = ({ className, client, history }) => {
   const player = usePlayer();
   const [tourOpen, setTourOpen] = useState(
-    player.user.userdetail.tutorial[1] === null ||
-      player.user.userdetail.tutorial.length === 0
+    player.user.player.tutorial[1] === null ||
+      player.user.player.tutorial.length === 0
       ? true
-      : player.user.userdetail.tutorial[1],
+      : player.user.player.tutorial[1],
   );
   const [showModal, setShowModal] = useState(false);
   const handleAvaClick = () => {
@@ -96,11 +96,11 @@ const Dashboard = ({ className, client, history }) => {
       player.changeAvatar(ava).then(response => {
         const data = client.readQuery({
           query: GET_PLAYER_DATA,
-          variables: { player: player.user.userdetail._id },
+          variables: { player: player.user.player._id },
         });
         client.writeQuery({
           query: GET_PLAYER_DATA,
-          variables: { player: player.user.userdetail._id },
+          variables: { player: player.user.player._id },
           data: {
             players: [
               {
@@ -123,7 +123,7 @@ const Dashboard = ({ className, client, history }) => {
       <Query
         query={GET_PLAYER_DATA}
         variables={{
-          player: player.user.userdetail._id,
+          player: player.user.player._id,
         }}
         fetchPolicy="cache-and-network"
       >
@@ -145,10 +145,10 @@ const Dashboard = ({ className, client, history }) => {
                   <div className="row " style={{ marginTop: '20px' }}>
                     <div className="col-8">
                       <Course
-                        playerid={player.user.userdetailid}
+                        playerid={player.user.player._id}
                         onTakeCourse={() => {
                           setTourOpen(false);
-                          if (player.user.userdetail.tutorial) {
+                          if (player.user.player.tutorial) {
                             player.setTutorial(false, 1);
                           }
                           history.push('/course');
@@ -157,7 +157,7 @@ const Dashboard = ({ className, client, history }) => {
                     </div>
                     <div className="col-4">
                       <DailyTarget
-                        dailyExp={player.user.userdetail.daily_exp}
+                        dailyExp={player.user.player.daily_exp}
                       />
                       {/*<Card className="card " style={{ marginTop: '20px' }}>*/}
                       {/*  <div className="card-body">*/}
@@ -203,7 +203,7 @@ const Dashboard = ({ className, client, history }) => {
         lastStepNextButton={<></>}
         onRequestClose={() => {
           setTourOpen(false);
-          if (player.user.userdetail.tutorial) {
+          if (player.user.player.tutorial) {
             player.setTutorial(false, 1);
           }
         }}

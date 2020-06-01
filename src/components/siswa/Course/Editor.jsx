@@ -4,11 +4,14 @@ import styled from 'styled-components';
 import classNames from 'classnames';
 import { BASE_URL } from '../../../config/config';
 import 'brace/mode/html';
+import 'brace/mode/c_cpp';
+
 import 'brace/theme/tomorrow';
 import { Button } from '../../UI/Components';
+import APIService from "../../../services/APIService";
 
 const postScript = `\x3Cscript src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'>\x3C/script>
-\x3Cscript src='${BASE_URL}js/validator.js'>\x3C/script>`;
+\x3Cscript src='${BASE_URL}assets/js/validator.js'>\x3C/script>`;
 
 const SiswaCourseEditor = ({
   checkResult,
@@ -20,6 +23,7 @@ const SiswaCourseEditor = ({
   onClick,
   show,
   editorId,
+  language,
 }) => {
   const [script, setScript] = useState(initialScript);
   const onChangeScript = value => {
@@ -34,12 +38,28 @@ const SiswaCourseEditor = ({
   };
 
   const run = () => {
+    let runScript = '';
+    if(language === 'c++'){
+      runScript = '\x3Cscript>console.log("Compiling...")\x3C/script>';
+      APIService.mutation(
+        `compile(script : "${script.replace(/(?:\r\n|\r|\n)/g, '\\n').replace(/"/g, '\\"')}")`,
+      ).then(response => {
+        const idoc = document.getElementById('output').contentWindow.document;
+        runScript = '\x3Cscript>console.log("'+response.data.data.compile+'")\x3C/script>';
+        idoc.open();
+        idoc.write(postScript + runScript);
+        idoc.close();
+      });
+    } else {
+      runScript = script;
+    }
     if (document.getElementById('output')) {
       const idoc = document.getElementById('output').contentWindow.document;
       idoc.open();
-      idoc.write(postScript + script);
+      idoc.write(postScript + runScript);
       idoc.close();
     }
+
   };
   useEffect(
     () => {
@@ -84,7 +104,7 @@ const SiswaCourseEditor = ({
                 </Button>
               </div>
               <AceEditor
-                mode="html"
+                mode={language === 'c++' ? 'c_cpp' : 'html' }
                 theme="tomorrow"
                 value={script}
                 width="100%"

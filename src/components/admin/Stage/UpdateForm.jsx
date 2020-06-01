@@ -24,12 +24,12 @@ const UpdateForm = ({ stage }) => {
           {updateStage => (
             <Formik
               initialValues={{
-                title: stage.title,
-                teory: stage.teory,
+                title: stage.title ? stage.title : '',
+                teory: stage.teory ,
                 time: stage.time ? stage.time : '',
                 exp_reward: stage.exp_reward ? stage.exp_reward : '',
                 script: stage.script ? stage.script : '',
-                language: stage.language,
+                language: stage.language ? stage.language : 'html',
                 image: undefined,
               }}
               onSubmit={(
@@ -76,6 +76,7 @@ const UpdateForm = ({ stage }) => {
                       <option value="html">HTML</option>
                       <option value="css">CSS</option>
                       <option value="javascript">Javascript</option>
+                      <option value="c++">C++</option>
                     </select>
                   </div>
 

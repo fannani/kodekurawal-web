@@ -40,13 +40,13 @@ const Status = ({ player, data, onAvaClick }) => (
         <div className="col-4">
           <h5>{player.user.name}</h5>
           <p>Malang, Jawa Timur</p>
-          <Level>Level {player.user.userdetail.level} : </Level>
+          <Level>Level {player.user.player.level} : </Level>
           <div className="row" id="exp-bar">
             <div className="col-5" style={{ paddingRight: '0px' }}>
               <Line
                 percent={
-                  (player.user.userdetail.exp /
-                    player.user.userdetail.target_exp) *
+                  (player.user.player.exp /
+                    player.user.player.target_exp) *
                   100
                 }
                 strokeWidth="4"
@@ -54,7 +54,7 @@ const Status = ({ player, data, onAvaClick }) => (
               />
             </div>
             <Progress className="col-4">
-              {player.user.userdetail.exp}/{player.user.userdetail.target_exp}
+              {player.user.player.exp}/{player.user.player.target_exp}
             </Progress>
           </div>
         </div>
@@ -88,8 +88,8 @@ const Status = ({ player, data, onAvaClick }) => (
             <div className="col-8 caption">
               <p>Stars</p>
               <div className="value">
-                {player.user.userdetail.stars
-                  ? player.user.userdetail.stars
+                {player.user.player.stars
+                  ? player.user.player.stars
                   : 0}
               </div>
             </div>

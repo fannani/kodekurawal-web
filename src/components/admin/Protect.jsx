@@ -1,13 +1,13 @@
 import React, { Suspense } from 'react';
 import { Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import useAdmin from '../../hooks/admin';
+import usePlayer from '../../hooks/player';
 import LoadingScreen from '../UI/LoadingScreen';
 import AdminSidebar from './Sidebar';
 
 const Protect = ({ location, children }) => {
-  const admin = useAdmin();
-  if (admin.isLogin) {
+  const player = usePlayer();
+  if (player.isAdmin) {
     return (
       <>
         <div className="container-fluid">

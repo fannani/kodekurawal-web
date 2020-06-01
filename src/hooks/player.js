@@ -35,6 +35,29 @@ import { toast } from 'react-toastify';
 const usePlayer = () => {
   const [state, dispatch] = useContext(AppContext);
 
+  const TOKEN_KEY = "tokens";
+  const saveTokens = (tokens) => {
+    localStorage.setItem(TOKEN_KEY, JSON.stringify(tokens));
+  }
+
+  const getTokens = () => {
+    return JSON.parse(localStorage.getItem(TOKEN_KEY));
+  }
+
+  const deleteTokens = () => {
+    localStorage.removeItem(TOKEN_KEY);
+  }
+
+
+  const setAuth = (user) => {
+    const success = (user) => ({
+      type: LOGIN_SUCCESS,
+      user,
+      isLogin : true,
+    });
+    dispatch(success(user));
+  }
+
   const login = (email, password) => {
     const request = () => ({ type: LOGIN_REQUEST });
     const success = (user, isLogin) => ({
@@ -63,7 +86,7 @@ const usePlayer = () => {
   };
 
   const setTutorial = (tutorial, index) => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     const request = () => ({ type: SET_TUTORIAL_REQUEST });
     const success = user => ({ type: SET_TUTORIAL_SUCCESS, user });
     const failure = error => ({ type: SET_TUTORIAL_FAILURE, error });
@@ -79,7 +102,7 @@ const usePlayer = () => {
   };
 
   const addEnergy = energy => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     const request = () => ({ type: ADD_ENERGY_REQUEST });
     const success = user => ({ type: ADD_ENERGY_SUCCESS, user });
     const failure = error => ({ type: ADD_ENERGY_FAILURE, error });
@@ -95,7 +118,7 @@ const usePlayer = () => {
   };
 
   const addBadge = badge => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     const request = () => ({ type: ADD_BADGE_REQUEST });
     const success = user => ({ type: ADD_BADGE_SUCCESS, user });
     const failure = error => ({ type: ADD_BADGE_FAILURE, error });
@@ -114,7 +137,7 @@ const usePlayer = () => {
   };
 
   const giveAchievement = achievement => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     const request = () => ({ type: GIVE_ACHIEV_REQUEST });
     const success = achiev => ({ type: GIVE_ACHIEV_SUCCESS, achiev });
     const failure = error => ({ type: GIVE_ACHIEV_FAILURE, error });
@@ -133,7 +156,7 @@ const usePlayer = () => {
   };
 
   const addExp = exp => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     const request = () => ({ type: ADD_EXP_REQUEST });
     const success = user => ({ type: ADD_EXP_SUCCESS, user });
     const failure = error => ({ type: ADD_EXP_FAILURE, error });
@@ -149,7 +172,7 @@ const usePlayer = () => {
   };
 
   const changeAvatar = avatar => {
-    const userid = state.user.userdetail._id;
+    const userid = state.user.player._id;
     return PlayerService.changeAvatar(userid, avatar._id).then(
       player => player,
       error => error,
@@ -166,7 +189,12 @@ const usePlayer = () => {
     giveAchievement,
     changeAvatar,
     setTutorial,
-    isLogin: state.isLogin && state.user.role === 'siswa',
+    saveTokens,
+    getTokens,
+    deleteTokens,
+    setAuth,
+    isLogin: state.isLogin && state.user.role === 'USER',
+    isAdmin: state.isLogin && state.user.role === 'ADMIN',
     user: state.user,
     incrementTimer: () => {
       dispatch(updateTimer());

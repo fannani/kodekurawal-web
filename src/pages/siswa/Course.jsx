@@ -92,10 +92,10 @@ const Course = ({
   const [indexQuestion, setIndexQuestion] = useState(0);
   const [stage, setStage] = useState({});
   const [tourOpen, setTourOpen] = useState(
-    player.user.userdetail.tutorial[0] === null ||
-      player.user.userdetail.tutorial.length === 0
+    player.user.player.tutorial[0] === null ||
+      player.user.player.tutorial.length === 0
       ? true
-      : player.user.userdetail.tutorial[0],
+      : player.user.player.tutorial[0],
   );
 
   useEffect(() => {
@@ -129,7 +129,7 @@ const Course = ({
   useEffect(
     () => {
       reset();
-      if (player.user.userdetail.energy - energyNeed < 0) {
+      if (player.user.player.energy - energyNeed < 0) {
         setIsPlay(false);
         setShowOutOfEnergy(true);
       }
@@ -145,7 +145,7 @@ const Course = ({
     <Container id="container">
       <Query
         query={GET_STAGE_BY_PLAYER}
-        variables={{ id: stageid, playerid: player.user.userdetailid }}
+        variables={{ id: stageid, playerid: player.user.player._id }}
       >
         {({ data: { stages }, loading, error }) => {
           if (loading) return <Loader />;
@@ -447,7 +447,7 @@ const Course = ({
                 }
                 onRequestClose={() => {
                   setTourOpen(false);
-                  if (player.user.userdetail.tutorial) {
+                  if (player.user.player.tutorial) {
                     player.setTutorial(false, 0);
                   }
                 }}

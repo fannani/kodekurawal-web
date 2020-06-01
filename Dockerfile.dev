@@ -4,4 +4,8 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
 COPY . .
-CMD [ "npm","run","dev"]
+COPY ./env.sh .
+COPY .env.example .
+RUN chmod +x env.sh
+CMD ["/bin/bash", "-c", "/usr/src/app/env.sh","npm","run","dev" ]
+
