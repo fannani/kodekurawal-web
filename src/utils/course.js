@@ -38,9 +38,10 @@ function convertTestCase(testcase) {
 
 export function checkResult(script, missions) {
   const idoc = document.getElementById('output').contentWindow.document;
-  let value = script;
-  value += `\x3Cscript src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'>\x3C/script>
-\x3Cscript src='${BASE_URL}js/validator.js'>\x3C/script>`;
+  //let value = script;
+  let value = '';
+//   value += `\x3Cscript src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'>\x3C/script>
+// \x3Cscript src='${BASE_URL}js/validator.js'>\x3C/script>`;
   value += `\x3Cscript>result=[]\x3C/script>`;
   let i = 0;
   for (const misi of missions) {
