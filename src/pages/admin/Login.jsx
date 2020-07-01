@@ -45,7 +45,6 @@ const Login = () => {
                       }
                     }).then(
                       ({data}) => {
-                        console.log("IAJSIDJAISJD");
                         setSubmitting(false);
                         player.saveTokens(data.signIn.tokens);
                         player.setAuth(data.signIn.user);
