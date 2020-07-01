@@ -40,7 +40,6 @@ const SiswaCourseValidator = ({ children, stages, gameOver, life }) => {
       if (compare.all >= stages[0].missions.length) gameOver(score, lifeTmp);
     } else if (passData.action === 'console') {
       if (document.getElementById('console')) {
-        console.log(passData);
         const idoc = document.getElementById('console').contentWindow.document;
         idoc.open();
         const style =

@@ -62,7 +62,7 @@ const SiswaStageItem = ({
   if (!unlock) {
     return <div className={className}>{child}</div>;
   }
-  if (energy - 20 < 0 && 1 === 0) {
+  if (energy - 20 < 0) {
     return (
       <a className={className} onClick={onOutOfEnergy}>
         {child}
