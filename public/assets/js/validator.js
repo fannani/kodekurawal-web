@@ -1,4 +1,4 @@
-var consoleData;  //TODO: Multiple check for log data
+var consoleData = [];  //TODO: Multiple check for log data
 (function($) {
   var old = console.log;
   var logger = '';
@@ -13,7 +13,7 @@ var consoleData;  //TODO: Multiple check for log data
         logger += arguments[i] + '<br />';
       }
     }
-    consoleData = arguments;
+    consoleData.push(arguments[0]);
     parent.postMessage({ action: 'console', data: logger }, '*');
   };
 

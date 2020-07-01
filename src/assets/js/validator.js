@@ -13,8 +13,7 @@ var consoleData;  //TODO: Multiple check for log data
         logger += arguments[i] + '<br />';
       }
     }
-    consoleData = arguments;
-    parent.postMessage({ action: 'console', data: logger }, '*');
+    parent.postMessage({ action: 'console', data: logger , test: consoleData }, '*');
   };
 
   $.fn.isAfter = function(sel) {
