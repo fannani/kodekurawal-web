@@ -44,7 +44,7 @@ const SiswaCourseValidator = ({ children, stages, gameOver, life }) => {
         idoc.open();
         const style =
           '\x3Cstyle>body { font-family : "consolas"; color: #ffffff } \x3C/style>';
-        idoc.write(style + passData.data);
+        idoc.write(style + passData.data.replace('\n', '<br />'));
         idoc.close();
       }
     }
