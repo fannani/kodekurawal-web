@@ -40,11 +40,12 @@ const SiswaCourseValidator = ({ children, stages, gameOver, life }) => {
       if (compare.all >= stages[0].missions.length) gameOver(score, lifeTmp);
     } else if (passData.action === 'console') {
       if (document.getElementById('console')) {
+        console.log(passData);
         const idoc = document.getElementById('console').contentWindow.document;
         idoc.open();
         const style =
           '\x3Cstyle>body { font-family : "consolas"; color: #ffffff } \x3C/style>';
-        idoc.write(style + passData.data.replace('\n', '<br />'));
+        idoc.write(style + passData.data);
         idoc.close();
       }
     }

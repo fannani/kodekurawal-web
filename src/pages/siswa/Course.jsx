@@ -129,7 +129,7 @@ const Course = ({
   useEffect(
     () => {
       reset();
-      if (player.user.player.energy - energyNeed < 0) {
+      if (player.user.player.energy - energyNeed < 0 && 1 === 0) {
         setIsPlay(false);
         setShowOutOfEnergy(true);
       }

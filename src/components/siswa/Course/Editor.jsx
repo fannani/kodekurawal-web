@@ -45,7 +45,10 @@ const SiswaCourseEditor = ({
         `compile(script : "${script.replace(/(?:\r\n|\r|\n)/g, '\\n').replace(/"/g, '\\"')}")`,
       ).then(response => {
         const idoc = document.getElementById('output').contentWindow.document;
-        runScript = '\x3Cscript>console.log("'+response.data.data.compile+'")\x3C/script>';
+        const data = response.data.data.compile.split('\\n');
+        runScript = '';
+        for(const val of data)
+          runScript += '\x3Cscript>console.log("'+val+'")\x3C/script>';
         idoc.open();
         idoc.write(postScript + runScript);
         idoc.close();
