@@ -81,11 +81,7 @@ const SiswaCourseGuide = ({
   );
 };
 
-SiswaCourseGuide.propTypes = {
-  mission: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired,
-  teory: PropTypes.string.isRequired,
-};
+
 
 const StyledGuide = styled(SiswaCourseGuide)`
   background-color: white;

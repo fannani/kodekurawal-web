@@ -181,6 +181,7 @@ const TextEditor = ({
       <Editor
         readOnly={true}
         editorState={editorState}
+        onChange={() => {}}
         handleKeyCommand={handleKeyCommand}
         plugins={plugins}
       />

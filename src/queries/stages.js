@@ -11,6 +11,7 @@ export const GET_STAGE_BY_COURSE_PLAYER = gql`
       score
       type
       stars
+      index
       imageid
       course {
         _id

@@ -214,7 +214,7 @@ const Course = ({
                           player.addExp(stages[0].exp_reward);
                           const addScoreData = {
                             variables: {
-                              player: player.user.userdetailid,
+                              player: player.user.player._id,
                               course: stages[0].course._id,
                               stage: stageid,
                               score,

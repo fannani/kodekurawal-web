@@ -32,7 +32,7 @@ const VideoModal = ({ showModal, onClose, onEnd }) => {
       <div className="modal-body">
         <div style={{ textAlign: 'center' }}>
           <YouTube
-            videoId="T8m3mlcXPiU"
+            videoId="zj7WTlL2YlU"
             onReady={onReady}
             onEnd={() => {
               onEnd();

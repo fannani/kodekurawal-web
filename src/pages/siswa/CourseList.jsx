@@ -5,8 +5,9 @@ import SiswaCourseListItem from '../../components/siswa/Course/List/Item';
 import { GET_COURSES } from '../../queries/courses';
 import styled from 'styled-components';
 const Loader = () => {
-  const content = (
+  const content = (index) => (
     <div
+      key={index}
       className="card m-2"
       style={{
         width: '200px',
@@ -25,7 +26,7 @@ const Loader = () => {
   );
   const all = [];
   for (let i = 0; i < 6; i += 1) {
-    all.push(content);
+    all.push(content(i));
   }
   return (
     <div>

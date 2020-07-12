@@ -56,7 +56,7 @@ const CourseDetail = ({ match, className }) => {
                           query={GET_STAGE_BY_COURSE_PLAYER}
                           variables={{
                             courseid: match.params.courseid,
-                            playerid: player.user.userdetailid,
+                            playerid: player.user.player._id,
                           }}
                         >
                           {({ loading: loadingStage, error, data }) => {
@@ -70,6 +70,7 @@ const CourseDetail = ({ match, className }) => {
                             let unlock = true;
                             const render = [];
                             const { stages } = data;
+                            console.log(stages);
                             for (let i = 0; i < stages.length; i += 1) {
                               render.push(
                                 <SiswaStageItem
