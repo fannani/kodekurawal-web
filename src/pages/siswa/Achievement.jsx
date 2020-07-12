@@ -17,7 +17,7 @@ const Achievement = () => {
         <main className="col-12 main-container" style={{ maxWidth: '1100px' }}>
           <Query
             query={GET_PLAYER_ACHIEVEMENTS}
-            variables={{ player: player.user.userdetailid }}
+            variables={{ player: player.user.player._id }}
           >
             {({ loading, error, data: { players } }) => {
               if (loading) return <div>Loading</div>;

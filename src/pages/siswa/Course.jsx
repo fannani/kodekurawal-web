@@ -173,7 +173,7 @@ const Course = ({
                       query: GET_STAGE_BY_COURSE_PLAYER,
                       variables: {
                         courseid: stages[0].course._id,
-                        playerid: player.user.userdetailid,
+                        playerid: player.user.player._id,
                       },
                       data: {
                         stages: addScore.stages,
@@ -181,7 +181,7 @@ const Course = ({
                     });
                     cache.writeQuery({
                       query: GET_PLAYER_ACHIEVEMENTS,
-                      variables: { player: player.user.userdetailid },
+                      variables: { player: player.user.player._id },
                       data: {
                         players: [
                           {
@@ -193,7 +193,7 @@ const Course = ({
                     });
                     cache.writeQuery({
                       query: GET_COURSE_BY_PLAYER,
-                      variables: { playerid: player.user.userdetailid },
+                      variables: { playerid: player.user.player._id },
                       data: {
                         players: [{ course: addScore.player.course }],
                       },
@@ -273,7 +273,7 @@ const Course = ({
                                   player.addExp(stages[0].exp_reward);
                                   const addScoreData = {
                                     variables: {
-                                      player: player.user.userdetailid,
+                                      player: player.user.player._id,
                                       course: stages[0].course._id,
                                       stage: stageid,
                                       score,
@@ -320,7 +320,7 @@ const Course = ({
                                     player.addExp(stages[0].exp_reward);
                                     const addScoreData = {
                                       variables: {
-                                        player: player.user.userdetailid,
+                                        player: player.user.player._id,
                                         course: stages[0].course._id,
                                         stage: stageid,
                                         score,
@@ -361,7 +361,7 @@ const Course = ({
                                   player.addExp(/*stages[0].exp_reward*/100);
                                   const addScoreData = {
                                     variables: {
-                                      player: player.user.userdetailid,
+                                      player: player.user.player._id,
                                       course: stages[0].course._id,
                                       stage: stageid,
                                       score : 100,
