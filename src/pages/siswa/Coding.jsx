@@ -16,7 +16,7 @@ const Coding = ({interactive, stage, onScriptChange,result,editorId,reset }) => 
       />
       <SiswaCourseEditor
       checkResult={data =>
-      checkResult(data, stage.missions)
+      checkResult(data, stage)
       }
       onClick={interactive.onEditorClick}
       show={interactive.editorShow}
