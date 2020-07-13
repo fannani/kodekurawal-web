@@ -59,12 +59,12 @@ const Choice = ({value, text, state, disable, onClick, }) => {
   const color = (state === "SELECTED") ? '#1FB1F7' : (state === "IS_ANSWER") ? '#93D333' : (state === "WRONG_ANSWER") ? '#EF494F' : '#E5E5E5';
   const pointer_event = (disable) ? 'none' : 'auto';
   return (
-    <div className="card" 
+    <div className="card"
         style={{
           borderRadius:"10px",
-          marginTop:"10px", 
-          cursor:"pointer", 
-          border: `2px solid ${color}`, 
+          marginTop:"10px",
+          cursor:"pointer",
+          border: `2px solid ${color}`,
           pointerEvents: pointer_event,
           padding:"10px"}}
          onClick={() => {
@@ -106,12 +106,12 @@ const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectCh
       }
     }
   }, [isSubmitted])
-  
+
   const onChoiceClick = (value) => {
     setChoiceActive(value);
   }
 
-  const addScore = 100/quiz.questions.length;
+  const addScore = Math.round(100/quiz.questions.length);
 
   const gameOver = () => {
     onFinish(score);
@@ -156,15 +156,15 @@ const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectCh
                 text={choice}
                 state={(() => {
                   if(choice === quiz.questions[index].answer && isSubmitted ){
-                     return "IS_ANSWER" 
+                     return "IS_ANSWER"
                   }
                   if(choiceActive === choice && choice !== quiz.questions[index].answer && isSubmitted  ){
                     return "WRONG_ANSWER"
                   }
                   if(choiceActive === choice){
-                    return "SELECTED" 
+                    return "SELECTED"
                   }
-                })()} 
+                })()}
                 disable={choiceDisable ? true : false}
                 onClick={onChoiceClick}/>
             ))}
@@ -182,7 +182,7 @@ const Quiz = ({ className, stage : {quiz} , onFinish, onWrongChoice, onCorrectCh
             </ButtonSubmit>
           </BottomBar>
         </div>
-      
+
     </Card>
   )
 }
