@@ -36,10 +36,10 @@ function convertTestCase(testcase) {
   return testStr.replace(/&& +$/, '');
 }
 
-export function checkResult(script, missions) {
+export function checkResult(script, stage) {
+  const missions = stage.missions;
   const idoc = document.getElementById('output').contentWindow.document;
-  //let value = script;
-  let value = '';
+  let value = stage.language === 'c++' ? '' : script;
 //   value += `\x3Cscript src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'>\x3C/script>
 // \x3Cscript src='${BASE_URL}js/validator.js'>\x3C/script>`;
   value += `\x3Cscript>result=[]\x3C/script>`;
